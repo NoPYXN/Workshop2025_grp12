@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Accueil</title>
+    <meta charset="UTF-8" />
+    <title>Accueil du Jeu</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'game/styles.css' %}" />
 </head>
 <body>
-    <h1>Bienvenue sur ma première page Django ! 🎉</h1>
-    <p>Cette page est générée depuis le template <strong>accueil.html</strong>.</p>
+    <div class="container">
+        <div class="context-box">
+            <p>
+                Bienvenue dans notre jeu d'aventure !<br>
+                Vous allez plonger dans un monde rempli de mystères, d'énigmes et de choix difficiles.
+                Êtes-vous prêt à relever le défi ?
+            </p>
+        </div>
+        <a href="{% url 'joueurs' %}">
+            <button class="bouton" type="button">Commencer à jouer</button>
+        </a>
+    </div>
 </body>
 </html>
