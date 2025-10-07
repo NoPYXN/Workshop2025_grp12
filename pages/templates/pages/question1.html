@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="{% static 'styles.css' %}">
     </head>
     <body>
+        {% include 'partials/navbar.html' %}
         <div class="container">
             <div class="context-box">
                 <p>
@@ -25,6 +26,17 @@
                 <div class="reponse-box">
                     <input type="text" id="reponse" name="reponse" placeholder="Écrivez votre réponse ici">
                     <button id="submit-reponse">Valider</button>
+                </div>
+
+                <div class="resultat" style="display:none">
+                    <p>
+                        Bravo !</br>
+                        Tu as trouvé la bonne réponse. 🎉
+                    </p>
+                </div>
+
+                <div class="erreur" style="display:none; color:red;">
+                    <p>Mauvaise réponse ❌ — essaye encore !</p>
                 </div>
 
             </div>
@@ -49,28 +61,45 @@
 
 <script>
     const helpBtn = document.querySelector('.bouton-aide');
-    const modal = document.getElementById('popup-indice');
+    const popup = document.getElementById('popup-indice');
     const closeModal = document.getElementById('close-popup');
     const confirmBtn = document.getElementById('confirm-indice');
     const cancelBtn = document.getElementById('cancel-indice');
     const indice = document.querySelector('.indice');
+    const submitBtn = document.getElementById('submit-reponse');
+    const reponseBox = document.querySelector('.reponse-box');
+    const reponse = document.querySelector('.reponse');
+    const resultat = document.querySelector('.resultat');
+    const erreur = document.querySelector('.erreur');
+    const inputReponse = document.getElementById('reponse');
 
     helpBtn.addEventListener('click', () => {
-        modal.style.display = 'flex';
+        popup.style.display = 'flex';
     });
 
     closeModal.addEventListener('click', () => {
-        modal.style.display = 'none';
+        popup.style.display = 'none';
     });
     cancelBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
+        popup.style.display = 'none';
     });
 
     confirmBtn.addEventListener('click', () => {
         indice.style.display = 'block';
         helpBtn.disabled = true;
         helpBtn.style.opacity = 0.5;
-        modal.style.display = 'none';
+        popup.style.display = 'none';
     });
-</script>
 
+    submitBtn.addEventListener('click', () => {
+        const valeur = inputReponse.value.trim().toLowerCase(); // on ignore les espaces et majuscules
+
+            if (valeur === 'a') {
+                reponseBox.style.display = 'none';
+                erreur.style.display = 'none';
+                resultat.style.display = 'block';
+            } else {
+                erreur.style.display = 'block';
+            }
+        });
+</script>

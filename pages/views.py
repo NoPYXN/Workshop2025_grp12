@@ -8,3 +8,6 @@ def joueurs(request):
 
 def documents(request):
     return render(request, 'pages/documents.html')
+
+def question1(request, joueur_id):
+    return render(request, 'pages/Question1.html', {'joueur_id': joueur_id})

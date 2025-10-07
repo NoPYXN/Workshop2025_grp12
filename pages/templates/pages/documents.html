@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{% static 'styles.css' %}" />
 </head>
 <body>
+    {% include 'partials/navbar.html' %}
     <div class="container">
         <div class="container-box">
             <p>
@@ -21,12 +22,17 @@
             </div>
             <div class="infos">
                 <h3>Tour Eiffel</h3>
-                <p>
-                    Construite en 1889 pour l’Exposition universelle, elle est le symbole de Paris et 
-                    l’un des monuments les plus visités au monde.
+                <p class="description">
+                Construite en 1889 pour l’Exposition universelle, elle est le symbole de Paris
+                et l’un des monuments les plus visités au monde.
+                </p>
+                <p class="environnement">
+                Située sur le Champ-de-Mars à Paris, elle offre une vue panoramique sur la capitale
+                et attire des millions de visiteurs chaque année.
                 </p>
             </div>
         </div>
+
 
         <div class="documents-box">
             <div class="image">
