@@ -15,3 +15,6 @@ def j2(request):
 
 def j3(request):
     return render(request, 'pages/j3.html')
+
+def documents(request):
+    return render(request, 'pages/documents.html')

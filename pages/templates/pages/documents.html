@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Documentations</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+</head>
+<body>
+    <div class="container">
+        <div class="container-box">
+            <p>
+                Bienvenue dans la documentation !<br>
+                Voici quelque information pour résoudre cette énigme.
+            </p>      
+        </div>
+
+        <div class="documents-box">
+            <div class="image">
+                <img src="{% static 'eiffel.png' %}" alt="tour-eiffel">
+            </div>
+            <div class="infos">
+                <h3>Tour Eiffel</h3>
+                <p>
+                    Construite en 1889 pour l’Exposition universelle, elle est le symbole de Paris et 
+                    l’un des monuments les plus visités au monde.
+                </p>
+            </div>
+        </div>
+
+        <div class="documents-box">
+            <div class="image">
+                <img src="{% static 'statue_liberte.jpg' %}" alt="statue_liberte">
+            </div>
+            <div class="infos">
+                <h3>Statue de la liberté</h3>        
+                <p>
+                    Cadeau de la France (1886), symbole de liberté et d’accueil des immigrants à New York.
+                </p>
+            </div>
+        </div>
+        
+        <div class="documents-box">
+            <div class="image">
+                <img src="{% static 'colise.jpg' %}" alt="colise">
+            </div>
+            <div class="infos">
+                <h3>Colisée</h3>
+                <p>
+                    Amphithéâtre romain de Rome (Ier siècle), célèbre pour les combats de gladiateurs.
+                </p>
+            </div>
+        </div>
+
+        <div class="documents-box">
+            <h3>Big Ben</h3>
+            <p>
+                Siège du Parlement britannique à Londres, Big Ben désigne l’horloge de la tour Elizabeth.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
