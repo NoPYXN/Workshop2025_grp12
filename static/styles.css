@@ -37,6 +37,7 @@ body, html {
     background-color: #45a049;
 }
 
+/* Page de question */
 .popup {
   display: none;
   position: fixed;
@@ -135,4 +136,23 @@ body, html {
 
 .reponse-box button:hover {
     background-color: #2980b9;
+}
+
+/* Page de documentation */
+.documents-box {
+    max-width: 100vh;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex;
+}
+
+.image {
+    padding-right: 10;
+}
+
+.infos {
+    border-right: 5px;
 }

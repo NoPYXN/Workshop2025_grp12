@@ -6,5 +6,5 @@ def accueil(request):
 def joueurs(request):
     return render(request, 'pages/joueurs.html')
 
-def question1(request, joueur_id):
-    return render(request, 'pages/Question1.html', {'joueur_id': joueur_id})
+def documents(request):
+    return render(request, 'pages/documents.html')
