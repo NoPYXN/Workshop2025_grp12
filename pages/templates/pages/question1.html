@@ -1,105 +1,99 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <title>Question 1</title>
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'styles.css' %}">
-    </head>
-    <body>
-        {% include 'partials/navbar.html' %}
-        <div class="container">
-            <div class="context-box">
-                <p>
-                    {% if joueur_id == 1 %}
-                        <h1>Bienvenue Joueur 1</h1>
-                        <p>Indice 1</p>
-                    {% elif joueur_id == 2 %}
-                        <h1>Bienvenue Joueur 2</h1>
-                        <p>Indice 2</p>
-                    {% elif joueur_id == 3 %}
-                        <h1>Bienvenue Joueur 3</h1>
-                        <p>Indice 3</p>
-                    {% endif %}
-                </p>
-                
-                <div class="reponse-box">
-                    <input type="text" id="reponse" name="reponse" placeholder="Écrivez votre réponse ici">
-                    <button id="submit-reponse">Valider</button>
-                </div>
+  <head>
+    <meta charset="UTF-8">
+    <title>Question 1</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'question.css' %}">
+    <link rel="stylesheet" href="{% static 'navbar.css' %}">
+  </head>
+  <body>
+    {% include 'partials/navbar.html' %}
+    <div class="container">
+      <div class="context-box">
+        <h1 class="titre-principal">🕵️ Mission : Déjoue l'attaque !</h1>
 
-                <div class="resultat" style="display:none">
-                    <p>
-                        Bravo !</br>
-                        Tu as trouvé la bonne réponse. 🎉
-                    </p>
-                </div>
+        {% if joueur_id == 1 %}
+          <h2>Bienvenue Joueur 1</h2>
+          <p>Indice 1 : Le monument est célèbre pour sa hauteur et sa lumière.</p>
 
-                <div class="erreur" style="display:none; color:red;">
-                    <p>Mauvaise réponse ❌ — essaye encore !</p>
-                </div>
+        {% elif joueur_id == 2 %}
+          <h2>Bienvenue Joueur 2</h2>
+          <p>Indice 2 : La date est liée à un grand événement mondial.</p>
 
+        {% elif joueur_id == 3 %}
+          <h2>Bienvenue Joueur 3</h2>
+          <p>Ta mission : trouve l’heure exacte de l’attaque.</p>
+          <div class="calcul">
+            ( Poids de la Tour Eiffel − Altitude du pont Cau Vang ) + 
+            <div class="fraction">
+              <span class="num">Habitants de Chiang Rai</span>
+              <span class="den">10</span>
             </div>
-            
-            <button class="bouton-aide">?</button>
-            
-            <div id="popup-indice" class="popup">
-            <div class="popup-content">
-                <span id="close-popup">&times;</span>
-                <p>Voulez-vous vraiment utiliser votre indice ? Vous n'en avez droit qu'à un seul dans toute la partie !</p>
-                <button id="confirm-indice">Oui</button>
-                <button id="cancel-indice">Non</button>
-            </div>
-            </div>
+          </div>
+        {% endif %}
 
-            <div class="indice" style="display:none;">
-                <p>Voici un indice pour t'aider !</p>
-            </div>
+        <div class="reponse-box">
+          <input type="text" id="reponse" name="reponse" placeholder="Ta réponse ici...">
+          <button id="submit-reponse" class="btn-valider">Valider</button>
         </div>
-    </body>
-</html>
 
-<script>
-    const helpBtn = document.querySelector('.bouton-aide');
-    const popup = document.getElementById('popup-indice');
-    const closeModal = document.getElementById('close-popup');
-    const confirmBtn = document.getElementById('confirm-indice');
-    const cancelBtn = document.getElementById('cancel-indice');
-    const indice = document.querySelector('.indice');
-    const submitBtn = document.getElementById('submit-reponse');
-    const reponseBox = document.querySelector('.reponse-box');
-    const reponse = document.querySelector('.reponse');
-    const resultat = document.querySelector('.resultat');
-    const erreur = document.querySelector('.erreur');
-    const inputReponse = document.getElementById('reponse');
+        <div class="resultat" style="display:none;">🎉 Bravo, tu as réussi !</div>
+        <div class="erreur" style="display:none;">❌ Mauvaise réponse, réessaie !</div>
+      </div>
 
-    helpBtn.addEventListener('click', () => {
-        popup.style.display = 'flex';
-    });
+      <button class="bouton-aide">💡</button>
 
-    closeModal.addEventListener('click', () => {
-        popup.style.display = 'none';
-    });
-    cancelBtn.addEventListener('click', () => {
-        popup.style.display = 'none';
-    });
+      <div id="popup-indice" class="popup" style="display:none;">
+        <div class="popup-content">
+          <span id="close-popup">&times;</span>
+          <p>Utiliser ton indice ? (Tu n’en as qu’un seul !)</p>
+          <button id="confirm-indice" class="btn-oui">Oui</button>
+          <button id="cancel-indice" class="btn-non">Non</button>
+        </div>
+      </div>
+      <div class="indice" style="display:none;">
+        <p>Indice : </p>
+      </div>
+    </div>
 
-    confirmBtn.addEventListener('click', () => {
-        indice.style.display = 'block';
-        helpBtn.disabled = true;
-        helpBtn.style.opacity = 0.5;
-        popup.style.display = 'none';
-    });
+    <script>
+const helpBtn = document.querySelector('.bouton-aide');
+const popup = document.getElementById('popup-indice');
+const closePopup = document.getElementById('close-popup');
+const confirmBtn = document.getElementById('confirm-indice');
+const cancelBtn = document.getElementById('cancel-indice');
+const indice = document.querySelector('.indice');
 
-    submitBtn.addEventListener('click', () => {
-        const valeur = inputReponse.value.trim().toLowerCase(); // on ignore les espaces et majuscules
+const submitBtn = document.getElementById('submit-reponse');
+const reponse = document.getElementById('reponse');
+const resultat = document.querySelector('.resultat');
+const erreur = document.querySelector('.erreur');
+const reponseBox = document.querySelector('.reponse-box');
 
-            if (valeur === 'a') {
-                reponseBox.style.display = 'none';
-                erreur.style.display = 'none';
-                resultat.style.display = 'block';
-            } else {
-                erreur.style.display = 'block';
-            }
-        });
+// Ouvrir le popup d'aide
+helpBtn.addEventListener('click', () => {
+    popup.style.display = 'flex';
+});
+
+// Fermer le popup
+closePopup.addEventListener('click', () => {
+    popup.style.display = 'none';
+});
+cancelBtn.addEventListener('click', () => {
+    popup.style.display = 'none';
+});
+
+// Confirmer l'utilisation de l'indice
+confirmBtn.addEventListener('click', () => {
+    indice.style.display = 'block';        // afficher l'indice
+    helpBtn.disabled = true;               // désactiver le bouton d'aide
+    helpBtn.style.opacity = 0.5;
+    popup.style.display = 'none';          // fermer le popup
+    reponseBox.style.display = 'block';    // afficher la zone de réponse après indice
+});
+
 </script>
+
+  </body>
+</html>
