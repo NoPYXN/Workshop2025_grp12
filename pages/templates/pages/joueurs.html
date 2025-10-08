@@ -10,10 +10,16 @@
   <body>
     {% include 'partials/navbar.html' %}
     <div class="container">
-      <h1>Sélectionne ton joueur 🔥</h1>
-      <a href="{% url 'question1' 1 %}"><button class="bouton" type="button">Joueur 1</button></a>
-      <a href="{% url 'question1' 2 %}"><button class="bouton" type="button">Joueur 2</button></a>
-      <a href="{% url 'question1' 3 %}"><button class="bouton" type="button">Joueur 3</button></a>
+        <h1>Sélectionne ton joueur 🔥</h1>
+        <a href="{% url 'question1' 1 %}">
+            <button class="bouton" type="button" onclick="localStorage.setItem('joueurId', 1)">Joueur 1</button>
+        </a>
+        <a href="{% url 'question1' 2 %}">
+            <button class="bouton" type="button" onclick="localStorage.setItem('joueurId', 2)">Joueur 2</button>
+        </a>
+        <a href="{% url 'question1' 3 %}">
+            <button class="bouton" type="button" onclick="localStorage.setItem('joueurId', 3)">Joueur 3</button>
+        </a>
     </div>
   </body>
 </html>

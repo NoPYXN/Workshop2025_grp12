@@ -21,18 +21,19 @@
         {% elif joueur_id == 2 %}
             <h2>Ta mission : Ta mission est de trouver la date de l'attaque</h2>
             <div class="calcul">
-            <p>Jour = Nombre de pays différent - Nombre d'habitant à Athènes = 11-3 = 8</p>    
-            <p>Mois = (Année de construction du Temple Blanc ÷ 285) − 1</p>
+            <p>Jour = Nombre de pays différent - Nombre d'habitant à Athènes en million</p>    
+            <p>Mois = Nombre d'habitant en million de Londres - Nombre d'habitant en million de Paris </p>
             </div>
 
         {% elif joueur_id == 3 %}
             <h2>Ta mission : trouve l’heure exacte de l’attaque</h2>
             <div class="calcul">
-            ( Poids de la Tour Eiffel − Altitude du pont Cau Vang ) + 
+            ( Poids de la Tour Eiffel − Altitude du pont Cau Vang ) - 
                 <div class="fraction">
                     <span class="num">Habitants de Chiang Rai</span>
                     <span class="den">10</span>
                 </div>
+            - 100
             </div>
         {% endif %}
 
@@ -96,6 +97,25 @@ const reponseBox = document.querySelector('.reponse-box');
 const popupAttaque = document.getElementById('popup-attaque');
 const closeAttaque = document.getElementById('close-attaque');
 
+let joueurId = localStorage.getItem('joueurId') || '{{ joueur_id }}';
+let questionActuelle = localStorage.getItem('questionActuelle') || 1;
+let indiceUtilise = localStorage.getItem('indiceUtilise') === 'true';
+
+const urlMatch = window.location.pathname.match(/question(\d+)\/\d+\//);
+if (urlMatch) {
+    const currentQuestion = parseInt(urlMatch[1]);
+    if (currentQuestion !== parseInt(questionActuelle)) {
+        window.location.href = `/question${questionActuelle}/${joueurId}/`;
+    }
+}
+
+// Empêche l’usage multiple de l’indice
+if (indiceUtilise) {
+    helpBtn.disabled = true;
+    helpBtn.style.opacity = 0.5;
+    indice.style.display = 'none';
+}
+
 // --- POPUP AIDE ---
 helpBtn.addEventListener('click', () => {
     popup.style.display = 'flex';
@@ -110,31 +130,31 @@ confirmBtn.addEventListener('click', () => {
     helpBtn.style.opacity = 0.5;
     popup.style.display = 'none';
     reponseBox.style.display = 'block';
+    localStorage.setItem('indiceUtilise', true);
 });
 
-// --- VALIDATION DE LA RÉPONSE ---
 submitBtn.addEventListener('click', () => {
     const valeur = reponse.value.trim().toLowerCase();
 
-    if (valeur === 'a') { 
+    if (valeur === 'a') { //marina bay sands hotel 08/07 16:00
         reponseBox.style.display = 'none';
         erreur.style.display = 'none';
         resultat.style.display = 'block';
-        
-        // Affiche le popup d’attaque après 5s
+        questionActuelle = parseInt(questionActuelle) + 1;
+        localStorage.setItem('questionActuelle', questionActuelle);
         setTimeout(() => {
             popupAttaque.style.display = 'flex';
-        }, 5000);
+        }, 4000);
 
     } else {
         erreur.style.display = 'block';
     }
 });
-
 // --- FERMETURE DU POPUP D’ATTAQUE ---
 closeAttaque.addEventListener('click', () => {
     popupAttaque.style.display = 'none';
+    window.location.href = `/question${questionActuelle}/${joueurId}/`; // redirige vers la question suivante
 });
 </script>
-  </body>
+</body>
 </html>

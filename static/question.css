@@ -8,7 +8,7 @@ html, body {
 }
 
 .container {
-  max-width: 800px;
+  max-width: 50%;
   margin: 120px auto 40px auto; /* plus de marge pour navbar */
   background: rgba(30, 30, 47, 0.9); /* légèrement opaque pour voir le gradient derrière */
   padding: 30px;
@@ -285,4 +285,21 @@ input {
   50% { transform: translateX(5px); }
   75% { transform: translateX(-5px); }
   100% { transform: translateX(0); }
+}
+
+
+.page-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px; /* espace entre l'image et le texte */
+}
+
+.ascii-image {
+    width: 200px; /* ajuster la taille */
+    height: auto;
+    border-radius: 5px;
+}
+
+.question-content {
+    flex: 1; /* prend le reste de la largeur */
 }

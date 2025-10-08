@@ -2,7 +2,16 @@
     <ul>
         <li class="logo">Manumental Game</li>
         <li><a href="{% url 'index' %}">Accueil</a></li>
-        <li><a href="{% url 'question1' joueur_id=1 %}">Questions</a></li>
+        <li><a href="#" id="link-question">Questions</a></li>
         <li><a href="{% url 'documents' %}">Documentation</a></li>
     </ul>
 </nav>
+
+<script>
+    const linkQuestion = document.getElementById('link-question');
+    linkQuestion.addEventListener('click', (e) => {
+        e.preventDefault(); // empêche le lien normal
+        const joueurId = localStorage.getItem('joueurId') || 1;
+        window.location.href = `/question1/${joueurId}/`;
+    });
+</script>
