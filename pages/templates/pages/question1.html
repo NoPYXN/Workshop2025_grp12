@@ -11,28 +11,37 @@
     {% include 'partials/navbar.html' %}
     <div class="container">
       <div class="context-box">
-        <h1 class="titre-principal">🕵️ Mission : Déjoue l'attaque !</h1>
-
+        <h1 class="titre-principal">Mission : Trouve le monument visé, la date et l'heure de l'attaque dans le temps imparti !</h1>
         {% if joueur_id == 1 %}
-          <h2>Bienvenue Joueur 1</h2>
-          <p>Indice 1 : Le monument est célèbre pour sa hauteur et sa lumière.</p>
+            <h2>Ta mission est de trouver la monument qui est visé par l'attaque</h2>
+            <div class="calcul">
+                (Année de construction du Château de Neuschwanstein) + 
+                <span class="fraction">
+                    <span class="num">Nombre d’habitants de Chiang Rai</span><br>
+                    <span class="den">10 000</span>
+                </span> + 
+                (Année de construction du Temple Blanc − 1500) = ?
+            </div>
 
         {% elif joueur_id == 2 %}
-          <h2>Bienvenue Joueur 2</h2>
-          <p>Indice 2 : La date est liée à un grand événement mondial.</p>
+            <h2>Ta mission : Ta mission est de trouver la date de l'attaque</h2>
+            <div class="calcul">
+            <p>Jour = Nombre de pays différent - Nombre d'habitant à Athènes = 11-3 = 8</p>    
+            <p>Mois = (Année de construction du Temple Blanc ÷ 285) − 1</p>
+            </div>
 
         {% elif joueur_id == 3 %}
-          <h2>Bienvenue Joueur 3</h2>
-          <p>Ta mission : trouve l’heure exacte de l’attaque.</p>
-          <div class="calcul">
+            <h2>Ta mission : trouve l’heure exacte de l’attaque</h2>
+            <div class="calcul">
             ( Poids de la Tour Eiffel − Altitude du pont Cau Vang ) + 
-            <div class="fraction">
-              <span class="num">Habitants de Chiang Rai</span>
-              <span class="den">10</span>
+                <div class="fraction">
+                    <span class="num">Habitants de Chiang Rai</span>
+                    <span class="den">10</span>
+                </div>
             </div>
-          </div>
         {% endif %}
 
+        <p>(Format réponse attendu : Nom monument JJ/MM 00:00)</p>
         <div class="reponse-box">
           <input type="text" id="reponse" name="reponse" placeholder="Ta réponse ici...">
           <button id="submit-reponse" class="btn-valider">Valider</button>
@@ -112,7 +121,8 @@ confirmBtn.addEventListener('click', () => {
 submitBtn.addEventListener('click', () => {
     const valeur = reponse.value.trim().toLowerCase();
 
-    if (valeur === 'a') {
+    // réponse = 08/07 16h00
+    if (valeur === 'a') { 
         reponseBox.style.display = 'none';
         erreur.style.display = 'none';
         resultat.style.display = 'block';
