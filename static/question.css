@@ -18,9 +18,9 @@ html, body {
 }
 
 .titre-principal {
-  font-size: 2em;
+  font-size: 1.8em;
   margin-bottom: 20px;
-  color: #ff4d4d; /* rouge pour alerte */
+  color: #ff4d4d;
   text-shadow: 0 0 10px #ff4d4d;
 }
 
@@ -209,4 +209,28 @@ input {
   border-width: 10px 10px 0 10px;
   border-style: solid;
   border-color: #ff4d4d transparent transparent transparent;
+}
+
+.calcul {
+  font-size: 1.3em;
+  margin: 20px 0;
+  line-height: 1.5em;
+}
+
+.fraction {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  margin: 0 5px;
+}
+
+.fraction .num {
+  display: block;
+  border-bottom: 2px solid #fff;
+  padding: 0 5px;
+}
+
+.fraction .den {
+  display: block;
+  padding: 0 5px;
 }
