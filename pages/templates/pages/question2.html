@@ -14,33 +14,29 @@
         <div class="page-layout">
         <img src="{% static 'ascii.png' %}" alt="Table ASCII" class="ascii-image">
         <div class="question-content">
-            <h1 class="titre-principal">Mission : Trouve le monument visé, la date et l'heure de l'attaque dans le temps imparti !</h1>
+            <h1 class="titre-principal">Mission : Trouve le monument visé, la date et l'heure de l'attaque dans le temps imparti grâce au indice laissé en code ascii décimaux !</h1>
             {% if joueur_id == 1 %}
-                <h2>Ta mission est de trouver le monument qui est visé par l'attaque</h2>
-                <div class="calcul">
-                    (Année de construction de la Cathédrale Saint-Paul) + Taille de la tour Eiffel en mètres + Nombre d’habitants à Moscou en millions - 2 = ?
+                <h2>Ta mission : trouve l’heure exacte de l’attaque, en t'aidant du tableau à gauche déchiffre l'indice en code ascii !</h2>
+                <div>
+                    <p>118 105 110 103 116 45 115 101 116 32 106 117 105 108 108 101 116</p>    
                 </div>
             {% elif joueur_id == 2 %}
-                <h2>Ta mission : Ta mission est de trouver la date de l'attaque</h2>
-                <div class="calcul">
-                    <p>Jour = Nombre de pays différent - Nombre d'habitant à Athènes = 11-3 = 8</p>    
-                    <p>Mois = (Année de construction du Temple Blanc ÷ 285) − 1</p>
+                <h2>Ta mission est de trouver le monument qui est visé par l'attaque, en t'aidant du tableau à gauche déchiffre l'indice en code ascii !</h2>
+                <div>
+                    67 111 110  99 117 101  32 112  97 114  32  67 104 114 105 115 116 111 112 104 101 114  32  87 114 101 110
                 </div>
             {% elif joueur_id == 3 %}
-                <h2>Ta mission : trouve l’heure exacte de l’attaque</h2>
-                <div class="calcul">
-                    ( Poids de la Tour Eiffel − Altitude du pont Cau Vang ) + 
-                    <div class="fraction">
-                        <span class="num">Habitants de Chiang Rai</span>
-                        <span class="den">10</span>
-                    </div>
+                <h2>Ta mission : Ta mission est de trouver la date de l'attaque, en t'aidant du tableau à gauche déchiffre l'indice en code ascii !</h2>
+                <div>
+                    <p>104 117 105 116 32 104 101 117 114 101 32 116 114 101 110 116 101 45 110 101 117 102</p>    
                 </div>
             {% endif %}
-            <p>(Format réponse attendu : Nom monument JJ/MM 00:00)</p>
+            
             <div class="reponse-box">
               <input type="text" id="reponse" name="reponse" placeholder="Ta réponse ici...">
               <button id="submit-reponse" class="btn-valider">Valider</button>
             </div>
+            <p>(Format réponse attendu : Nom monument JJ/MM 00:00)</p>
         </div>
     </div>
 

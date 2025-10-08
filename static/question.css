@@ -8,9 +8,9 @@ html, body {
 }
 
 .container {
-  max-width: 50%;
-  margin: 120px auto 40px auto; /* plus de marge pour navbar */
-  background: rgba(30, 30, 47, 0.9); /* légèrement opaque pour voir le gradient derrière */
+  max-width: 1200px; /* plus large pour les grands écrans */
+  margin: 120px auto 40px auto;
+  background: rgba(30, 30, 47, 0.9);
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
@@ -289,17 +289,38 @@ input {
 
 
 .page-layout {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px; /* espace entre l'image et le texte */
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  justify-content: center;
 }
 
 .ascii-image {
-    width: 200px; /* ajuster la taille */
-    height: auto;
-    border-radius: 5px;
+  width: 200px;       /* largeur par défaut */
+  max-width: 35%;     /* jamais plus de 35% du container */
+  height: auto;
+  border-radius: 5px;
 }
 
+@media (min-width: 1200px) {
+  .ascii-image {
+    width: 280px;     /* légèrement plus grande sur grand écran */
+  }
+}
+
+@media (max-width: 768px) {
+  .page-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+  .ascii-image {
+    width: 70%;
+    max-width: 250px;
+    margin-bottom: 20px;
+  }
+}
+
+
 .question-content {
-    flex: 1; /* prend le reste de la largeur */
+    flex: 1;           /* prend le reste de la largeur */
 }
