@@ -2,7 +2,7 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>Question 1</title>
+        <title>Question 3</title>
         {% load static %}
         <link rel="stylesheet" href="{% static 'styles.css' %}">
     </head>
@@ -31,17 +31,9 @@
                 <div class="resultat" style="display:none">
                     <p>
                         Bravo !</br>
-                        Tu as trouvé la bonne réponse. 🎉</br>
+                        Tu as trouvé la bonne réponse. 🎉
                     </p>
                 </div>
-
-                <div id="popup-attaque" class="popup" style="display:none;">
-                    <div class="popup-content">
-                        <p>Oh non, une autre attaque arrive ! 😱</p>
-                        <button id="close-attaque">Fermer</button>
-                    </div>
-                </div>
-
 
                 <div class="erreur" style="display:none; color:red;">
                     <p>Mauvaise réponse ❌ — essaye encore !</p>
@@ -91,8 +83,6 @@
     const resultat = document.querySelector('.resultat');
     const erreur = document.querySelector('.erreur');
     const inputReponse = document.getElementById('reponse');
-    const popupAttaque = document.getElementById('popup-attaque');
-    const closeAttaque = document.getElementById('close-attaque');
 
     helpBtn.addEventListener('click', () => {
         popup.style.display = 'flex';
@@ -119,13 +109,8 @@
                 reponseBox.style.display = 'none';
                 erreur.style.display = 'none';
                 resultat.style.display = 'block';
-                popupAttaque.style.display = 'flex';
             } else {
                 erreur.style.display = 'block';
             }
         });
-
-    closeAttaque.addEventListener('click', () => {
-        popupAttaque.style.display = 'none';
-    });
 </script>
