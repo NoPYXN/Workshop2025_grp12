@@ -38,6 +38,25 @@
           <button id="submit-reponse" class="btn-valider">Valider</button>
         </div>
 
+                <div class="resultat" style="display:none">
+                    <p>
+                        Bravo !</br>
+                        Tu as trouvé la bonne réponse. 🎉</br>
+                    </p>
+                </div>
+
+                <div id="popup-attaque" class="popup" style="display:none;">
+                    <div class="popup-content">
+                        <p>Oh non, une autre attaque arrive ! 😱</p>
+                        <button id="close-attaque">Fermer</button>
+                    </div>
+                </div>
+
+
+                <div class="erreur" style="display:none; color:red;">
+                    <p>Mauvaise réponse ❌ — essaye encore !</p>
+                </div>
+
         <div class="resultat" style="display:none;">🎉 Bravo, tu as réussi !</div>
         <div class="erreur" style="display:none;">❌ Mauvaise réponse, réessaie !</div>
       </div>
@@ -58,41 +77,67 @@
     </div>
 
     <script>
-const helpBtn = document.querySelector('.bouton-aide');
-const popup = document.getElementById('popup-indice');
-const closePopup = document.getElementById('close-popup');
-const confirmBtn = document.getElementById('confirm-indice');
-const cancelBtn = document.getElementById('cancel-indice');
-const indice = document.querySelector('.indice');
 
-const submitBtn = document.getElementById('submit-reponse');
-const reponse = document.getElementById('reponse');
-const resultat = document.querySelector('.resultat');
-const erreur = document.querySelector('.erreur');
-const reponseBox = document.querySelector('.reponse-box');
+    const helpBtn = document.querySelector('.bouton-aide');
+    const popup = document.getElementById('popup-indice');
+    const closeModal = document.getElementById('close-popup');
+    const confirmBtn = document.getElementById('confirm-indice');
+    const cancelBtn = document.getElementById('cancel-indice');
+    const indice = document.querySelector('.indice');
+    const submitBtn = document.getElementById('submit-reponse');
+    const reponseBox = document.querySelector('.reponse-box');
+    const reponse = document.querySelector('.reponse');
+    const resultat = document.querySelector('.resultat');
+    const erreur = document.querySelector('.erreur');
+    const inputReponse = document.getElementById('reponse');
+    const popupAttaque = document.getElementById('popup-attaque');
+    const closeAttaque = document.getElementById('close-attaque');
 
-// Ouvrir le popup d'aide
-helpBtn.addEventListener('click', () => {
-    popup.style.display = 'flex';
-});
+    // Ouvrir le popup d'aide
+    helpBtn.addEventListener('click', () => {
+        popup.style.display = 'flex';
+    });
 
-// Fermer le popup
-closePopup.addEventListener('click', () => {
-    popup.style.display = 'none';
-});
-cancelBtn.addEventListener('click', () => {
-    popup.style.display = 'none';
-});
+    // Fermer le popup
+    closePopup.addEventListener('click', () => {
+        popup.style.display = 'none';
+    });
+    cancelBtn.addEventListener('click', () => {
+        popup.style.display = 'none';
+    });
 
-// Confirmer l'utilisation de l'indice
-confirmBtn.addEventListener('click', () => {
-    indice.style.display = 'block';        // afficher l'indice
-    helpBtn.disabled = true;               // désactiver le bouton d'aide
-    helpBtn.style.opacity = 0.5;
-    popup.style.display = 'none';          // fermer le popup
-    reponseBox.style.display = 'block';    // afficher la zone de réponse après indice
-});
+    // Confirmer l'utilisation de l'indice
+    confirmBtn.addEventListener('click', () => {
+        indice.style.display = 'block';        // afficher l'indice
+        helpBtn.disabled = true;               // désactiver le bouton d'aide
+        helpBtn.style.opacity = 0.5;
+        popup.style.display = 'none';          // fermer le popup
+        reponseBox.style.display = 'block';    // afficher la zone de réponse après indice
+    });
 
+    confirmBtn.addEventListener('click', () => {
+        indice.style.display = 'block';
+        helpBtn.disabled = true;
+        helpBtn.style.opacity = 0.5;
+        popup.style.display = 'none';
+    });
+
+    submitBtn.addEventListener('click', () => {
+        const valeur = inputReponse.value.trim().toLowerCase(); // on ignore les espaces et majuscules
+
+            if (valeur === 'a') {
+                reponseBox.style.display = 'none';
+                erreur.style.display = 'none';
+                resultat.style.display = 'block';
+                popupAttaque.style.display = 'flex';
+            } else {
+                erreur.style.display = 'block';
+            }
+        });
+
+    closeAttaque.addEventListener('click', () => {
+        popupAttaque.style.display = 'none';
+    });
 </script>
 
   </body>

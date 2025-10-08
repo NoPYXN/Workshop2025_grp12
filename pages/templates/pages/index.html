@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Escape Game - Accueil</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'index.css' %}" />
+</head>
+<body class="accueil">
+    <div class="overlay"></div>
+
+    <div class="container">
+        <div class="context-box">
+            <h1 class="titre">Monumental Game</h1>
+            <p class="intro">
+                Bienvenue, cher joueurs ! <br>
+                De nombreuses épreuves t’attendent… <br>
+                Résous les énigmes, collabore avec ton équipe, et sauve tout le monde avant qu’il ne soit trop tard. ⏳
+            </p>
+        </div>
+
+        <a href="{% url 'joueurs' %}">
+            <button class="bouton" type="button">🚪 Commencer l'aventure</button>
+        </a>
+    </div>
+</body>
+</html>
