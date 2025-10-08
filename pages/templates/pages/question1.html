@@ -116,12 +116,16 @@ confirmBtn.addEventListener('click', () => {
 submitBtn.addEventListener('click', () => {
     const valeur = reponse.value.trim().toLowerCase();
 
-    // réponse = 08/07 16h00
     if (valeur === 'a') { 
         reponseBox.style.display = 'none';
         erreur.style.display = 'none';
         resultat.style.display = 'block';
-        popupAttaque.style.display = 'flex';
+        
+        // Affiche le popup d’attaque après 5s
+        setTimeout(() => {
+            popupAttaque.style.display = 'flex';
+        }, 5000);
+
     } else {
         erreur.style.display = 'block';
     }
@@ -132,7 +136,5 @@ closeAttaque.addEventListener('click', () => {
     popupAttaque.style.display = 'none';
 });
 </script>
-
-
   </body>
 </html>
