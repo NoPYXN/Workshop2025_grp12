@@ -80,19 +80,23 @@
 
         <button class="bouton-aide">💡</button>
 
-        <div id="popup-indice" class="popup" style="display:none;">
-            <div class="popup-content">
-            <span id="close-popup">&times;</span>
-            <p>Utiliser ton indice ? (Tu n’en as qu’un seul !)</p>
-            <button id="confirm-indice" class="btn-oui">Oui</button>
-            <button id="cancel-indice" class="btn-non">Non</button>
-            </div>
+      <div id="popup-indice" class="popup" style="display:none;">
+        <div class="popup-content">
+          <span id="close-popup">&times;</span>
+          <p>Vous possédez un seul indice pour toute la partie, voulez vous vraiment l'utiliser ?</p>
+          <button id="confirm-indice" class="btn-oui">Oui</button>
+          <button id="cancel-indice" class="btn-non">Non</button>
         </div>
-            <div class="indice" style="display:none;">
-                <p>Indice : </p>
-            </div>
-        </div>
-        </div>
+      </div>
+      <div class="indice" style="display:none;">
+        {% if joueur_id == 1 %}
+            <p>Indice 1</p>
+        {% elif joueur_id == 2 %}
+            <p>Indice 2</p>
+        {% elif joueur_id == 3 %}
+            <p>Indice 3</p>
+        {% endif %}
+      </div>
     </div>
 
 <script>
@@ -123,14 +127,12 @@ if (urlMatch) {
     }
 }
 
-// Empêche l’usage multiple de l’indice
 if (indiceUtilise) {
     helpBtn.disabled = true;
     helpBtn.style.opacity = 0.5;
     indice.style.display = 'none';
 }
 
-// --- POPUP AIDE ---
 helpBtn.addEventListener('click', () => {
     popup.style.display = 'flex';
 });
@@ -182,10 +184,10 @@ submitBtn.addEventListener('click', () => {
         erreur.style.display = 'block';
     }
 });
-// --- FERMETURE DU POPUP D’ATTAQUE ---
+
 closeAttaque.addEventListener('click', () => {
     popupAttaque.style.display = 'none';
-    window.location.href = `/question${questionActuelle}/${joueurId}/`; // redirige vers la question suivante
+    window.location.href = `/question${questionActuelle}/${joueurId}/`;
 });
 </script>
 </body>

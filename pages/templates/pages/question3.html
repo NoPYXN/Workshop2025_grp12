@@ -11,36 +11,29 @@
     {% include 'partials/navbar.html' %}
     <div class="container">
       <div class="context-box">
-        <h1 class="titre-principal">Mission : Trouve le monument visé, la date et l'heure de l'attaque dans le temps imparti !</h1>
-        {% if joueur_id == 1 %}
-            <h2>Ta mission est de trouver le monument qui est visé par l'attaque</h2>
-            <div class="calcul">
-                (Année de construction de la Cathédrale Saint-Paul) + Taille de la tour Eiffel en mètres + Nombre d’habitants à Moscou en millions - 2 = ?</span>
-            </div>
-
-        {% elif joueur_id == 2 %}
-            <h2>Ta mission : Ta mission est de trouver la date de l'attaque</h2>
-            <div class="calcul">
-            <p>Jour = Nombre de pays différent - Nombre d'habitant à Athènes = 11-3 = 8</p>    
-            <p>Mois = (Année de construction du Temple Blanc ÷ 285) − 1</p>
-            </div>
-
-        {% elif joueur_id == 3 %}
-            <h2>Ta mission : trouve l’heure exacte de l’attaque</h2>
-            <div class="calcul">
-            ( Poids de la Tour Eiffel − Altitude du pont Cau Vang ) + 
-                <div class="fraction">
-                    <span class="num">Habitants de Chiang Rai</span>
-                    <span class="den">10</span>
+        <h1 class="titre-principal">Nous avons reçu un message ce matin. Chacun de vous possède un fragment, mais les lettres ont été mélangées ! Remettez vos mots dans le bon ordre, puis assemblez vos trois fragments pour reformer la phrase complète</h1>
+            {% if joueur_id == 1 %}
+                <h2>Ta mission : </h2>
+                <div>
+                    L'installation est prête au Japon
                 </div>
-            </div>
-        {% endif %}
+            {% elif joueur_id == 2 %}
+                <h2>Ta mission :</h2>
+                <div>
+                    Tous est bon aussi en Grèce
+                </div>
+            {% elif joueur_id == 3 %}
+                <h2>Votre mission est de retrouver la</h2>
+                <div>
+                    Je viens de finir en Russie
+                </div>
+            {% endif %}
 
         <div class="reponse-box">
             <input type="text" id="reponse" name="reponse" placeholder="Ta réponse ici...">
             <button id="submit-reponse" class="btn-valider">Valider</button>
         </div>
-        <p>(Format réponse attendu : Nom monument JJ/MM 00:00)</p>
+        <p>(Format réponse attendu : le noms des trois monuments visés)</p>
         
                 <div class="resultat" style="display:none">
                     <p>
@@ -70,13 +63,19 @@
       <div id="popup-indice" class="popup" style="display:none;">
         <div class="popup-content">
           <span id="close-popup">&times;</span>
-          <p>Utiliser ton indice ? (Tu n’en as qu’un seul !)</p>
+          <p>Vous possédez un seul indice pour toute la partie, voulez vous vraiment l'utiliser</p>
           <button id="confirm-indice" class="btn-oui">Oui</button>
           <button id="cancel-indice" class="btn-non">Non</button>
         </div>
       </div>
       <div class="indice" style="display:none;">
-        <p>Indice : </p>
+        {% if joueur_id == 1 %}
+            <p>Indice 1</p>
+        {% elif joueur_id == 2 %}
+            <p>Indice 2</p>
+        {% elif joueur_id == 3 %}
+            <p>Indice 3</p>
+        {% endif %}
       </div>
     </div>
 
@@ -116,7 +115,6 @@ if (indiceUtilise) {
     indice.style.display = 'none';
 }
 
-// --- POPUP AIDE ---
 helpBtn.addEventListener('click', () => {
     popup.style.display = 'flex';
 });
@@ -136,7 +134,7 @@ confirmBtn.addEventListener('click', () => {
 submitBtn.addEventListener('click', () => {
     const valeur = reponse.value.trim().toLowerCase();
 
-    if (valeur === 'a') { 
+    if (valeur === 'a') { //Château d'Osaka Cathédrale L’Acropole d’Athènes Basile-le-Bienheureux
         reponseBox.style.display = 'none';
         erreur.style.display = 'none';
         resultat.style.display = 'block';
