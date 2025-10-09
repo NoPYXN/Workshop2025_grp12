@@ -12,59 +12,60 @@
     <div class="container">
       <div class="context-box">
         <div id="enonce">
-        <div class="page-layout">
-            <img src="{% static 'ascii.png' %}" alt="Table ASCII" class="ascii-image">
-        <div id="enonce">
-        <div class="question-content">
-            <h1 class="titre-principal">Trouvez le monument visé, la date et l'heure de l'attaque dans le temps imparti grâce au indice laissé en code ascii décimaux !</h1>
+        <h1 class="titre-principal">Nous avons reçu un message ce matin. Chacun de vous possède un fragment, mais les lettres ont été mélangées ! Remettez vos mots dans le bon ordre, puis assemblez vos trois fragments pour reformer la phrase complète</h1>
             {% if joueur_id == 1 %}
-                <h2>Décode l'indice ci-dessous grâce au tableau de conversion pour trouver l'heure à laquelle l'attaque est prévue!</h2>
+                <h2>Ta mission : </h2>
                 <div>
-                    <p>104 97 98 105 116 97 110 116 115 32 224 32 83 101 111 117 108 32 101 110 32 109 105 108 108 105 111 110 32 61 32 104 101 117 114 101</p> <!--habitants à Seoul en million = heure-->   
+                    ste panoJ ua pêtre L'lalationtins
                 </div>
             {% elif joueur_id == 2 %}
-                <h2>Décode l'indice ci-dessous grâce au tableau de conversion pour trouver le monument visé par l'attaque!</h2>
+                <h2>Ta mission :</h2>
                 <div>
-                     <p>67 111 110  99 117 101  32 112  97 114  32  67 104 114 105 115 116 111 112 104 101 114  32  87 114 101 110</p>  <!--Concu par Christopher Wren-->
+                    ne Gerèc ste Tuos rêpt assui
                 </div>
             {% elif joueur_id == 3 %}
-                <h2>Ta mission est de trouver la date de l'attaque, en t'aidant du tableau à gauche déchiffre l'indice en code ascii !</h2>
+                <h2>Votre mission est de retrouver la</h2>
                 <div>
-                    <p>104 117 105 116 32 104 101 117 114 101 32 116 114 101 110 116 101 45 110 101 117 102</p> <!--vingt-sept juillet-->
+                    venis eJ sRisue ifnir ne ed
                 </div>
             {% endif %}
-            
-            <div class="reponse-box">
-              <input type="text" id="reponse" name="reponse" placeholder="Ta réponse ici...">
-              <button id="submit-reponse" class="btn-valider">Valider</button>
-            </div>
-            <p>(Format réponse attendu : Nom monument JJ/MM 00:00)</p>
+
+        <div class="reponse-box">
+            <input type="text" id="reponse" name="reponse" placeholder="Ta réponse ici...">
+            <button id="submit-reponse" class="btn-valider">Valider</button>
         </div>
-        <!-- Message de félicitations -->
-        <div id="felicitation" style="display:none; text-align:center; margin-top:30px;">
-            <h2 style="color:#00ff99; text-shadow:0 0 10px #00ff99;">🎉 Bravo, mission accomplie !</h2>
-        </div>
-    
-        <!-- Message d'indice -->
-        <div id="indice-suivant" style="display:none; text-align:center; margin-top:20px;">
-            <p style="color:#ff4081; font-size:1.2em;">
-                Indice supplémentaire : Le monument est visible depuis une grande baie...
-            </p>
-        </div>
-    
-        <div id="popup-attaque" class="popup" style="display:none;">
-            <div class="popup-content">
-                <p>Oh non, une autre attaque arrive ! 😱</p>
-                <button id="close-attaque">Fermer</button>
-            </div>
-        </div>
-    
-        <div class="erreur" style="display:none; color:red;">
-            <p>Mauvaise réponse ❌ — essaye encore !</p>
-        </div>
+        <p>(Format réponse attendu : le noms des trois monuments visés)</p>
+    </div>
+    </div>
+        
+    <!-- Message de félicitations -->
+    <div id="felicitation" style="display:none; text-align:center; margin-top:30px;">
+        <h2 style="color:#00ff99; text-shadow:0 0 10px #00ff99;">🎉 Bravo, mission accomplie !</h2>
     </div>
 
-    <div>
+    <!-- Message d'indice -->
+    <div id="indice-suivant" style="display:none; text-align:center; margin-top:20px;">
+        <p style="color:#ff4081; font-size:1.2em;">
+            Indice supplémentaire : Le monument est visible depuis une grande baie...
+        </p>
+    </div>
+
+                <div id="popup-attaque" class="popup" style="display:none;">
+                    <div class="popup-content">
+                        <p>Nous avons enfin assez d'indices pour localiser la planque des malfrats</p>
+                        <button id="close-attaque">Fermer</button>
+                    </div>
+                </div>
+
+
+                <div class="erreur" style="display:none; color:red;">
+                    <p>Mauvaise réponse ❌ — essaye encore !</p>
+                </div>
+
+        <div class="resultat" style="display:none;">🎉 Bravo, tu as réussi !</div>
+        <div class="erreur" style="display:none;">❌ Mauvaise réponse, réessaie !</div>
+      </div>
+
       <button class="bouton-aide">💡</button>
 
       <div id="popup-indice" class="popup" style="display:none;">
@@ -77,11 +78,11 @@
       </div>
       <div class="indice" style="display:none;">
         {% if joueur_id == 1 %}
-            <p>habitants à Seoul en million = heure</p>
+            <p>L'installation est prête</p>
         {% elif joueur_id == 2 %}
-            <p>Concu par Christopher Wren</p>
+            <p>Tous est prêt aussi</p>
         {% elif joueur_id == 3 %}
-            <p>vingt-sept juillet</p>
+            <p>Je viens de finir</p>
         {% endif %}
       </div>
     </div>
@@ -106,6 +107,7 @@ let joueurId = localStorage.getItem('joueurId') || '{{ joueur_id }}';
 let questionActuelle = localStorage.getItem('questionActuelle') || 1;
 let indiceUtilise = localStorage.getItem('indiceUtilise') === 'true';
 
+// Verification de la question et de l'utilisation de l'indice
 const urlMatch = window.location.pathname.match(/question(\d+)\/\d+\//);
 if (urlMatch) {
     const currentQuestion = parseInt(urlMatch[1]);
@@ -114,13 +116,13 @@ if (urlMatch) {
     }
 }
 
+// Empêche l’usage multiple de l’indice
 if (indiceUtilise) {
     helpBtn.disabled = true;
     helpBtn.style.opacity = 0.5;
     indice.style.display = 'none';
 }
 
-// POPUP AIDE
 helpBtn.addEventListener('click', () => {
     popup.style.display = 'flex';
 });
@@ -134,16 +136,14 @@ confirmBtn.addEventListener('click', () => {
     helpBtn.style.opacity = 0.5;
     popup.style.display = 'none';
     reponseBox.style.display = 'block';
-    localStorage.setItem('indiceUtilise', true);
+    localStorage.setItem('indiceUtilise', true);//Château d'Osaka Cathédrale L’Acropole d’Athènes Basile-le-Bienheureux
 });
 
 submitBtn.addEventListener('click', () => {
-
     const valeur = reponse.value.trim().toLowerCase();
 
-    if (valeur === 'cathédrale saint-paul 27/07 09:00') {
-
-        // Cacher l'énoncé (titre, image, texte)
+    if (valeur === 'château d\'osaka cathédrale l\'acropole d\'athènes basile-le-bienheureux') {
+         // Cacher l'énoncé (titre, image, texte)
         document.getElementById('enonce').style.display = 'none';
 
         // Masquer la zone de réponse et les erreurs si visibles
@@ -153,22 +153,13 @@ submitBtn.addEventListener('click', () => {
         // Afficher le message de félicitations
         document.getElementById('felicitation').style.display = 'block';
 
-        // Augmenter la question pour la suite
-        questionActuelle = parseInt(questionActuelle) + 1;
-        localStorage.setItem('questionActuelle', questionActuelle);
-
         // Afficher le message de félicitations
         const felicitation = document.getElementById('felicitation');
         const indiceSuivant = document.getElementById('indice-suivant');
         felicitation.style.display = 'block';
 
-        // Après 3 secondes, afficher le nouvel indice
-        setTimeout(() => {
-            felicitation.style.display = 'none';
-            indiceSuivant.style.display = 'block';
-        }, 3000);
-
-        // Après quelques secondes, afficher le popup attaque
+        questionActuelle = parseInt(questionActuelle) + 1;
+        localStorage.setItem('questionActuelle', questionActuelle);
         setTimeout(() => {
             popupAttaque.style.display = 'flex';
         }, 4000);
@@ -177,10 +168,10 @@ submitBtn.addEventListener('click', () => {
         erreur.style.display = 'block';
     }
 });
-//FERMETURE DU POPUP D’ATTAQUE
+// --- FERMETURE DU POPUP D’ATTAQUE ---
 closeAttaque.addEventListener('click', () => {
     popupAttaque.style.display = 'none';
-    window.location.href = `/question${questionActuelle}/${joueurId}/`;
+    window.location.href = `/epreuve/${joueurId}/`; // redirige vers la question suivante
 });
 </script>
 </body>

@@ -10,4 +10,5 @@ urlpatterns = [
     path('question3/<int:joueur_id>/', views.question3, name='question3'), 
     path('epreuve/<int:joueur_id>/', views.epreuve, name='epreuve'),
     path('documents.html', views.documents, name='documents'),
+    path('victoire/<int:joueur_id>/', views.victoire, name='victoire'),
 ]

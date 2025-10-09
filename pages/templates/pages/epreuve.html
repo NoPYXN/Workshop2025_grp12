@@ -13,27 +13,21 @@
       <div class="context-box">
         <h1 class="titre-principal">Mission : Trouve la planque du poseur de bombe !</h1>
         {% if joueur_id == 1 %}
-            <h2>Ta mission est de trouver le monument qui est visé par l'attaque</h2>
+            <h2>Pour rappel, les indices sont...</h2>
             <div class="calcul">
-                (Année de construction de la Cathédrale Saint-Paul) + Taille de la tour Eiffel en mètres + Nombre d’habitants à Moscou en millions - 2 = ?</span>
+                Maintenant que nous avons assez d'indice, décodont les pour la localisation de la planque.
             </div>
 
         {% elif joueur_id == 2 %}
-            <h2>Ta mission : Ta mission est de trouver la date de l'attaque</h2>
+            <h2>Pour rappel, les indices sont...</h2>
             <div class="calcul">
-            <p>Jour = Nombre de pays différent - Nombre d'habitant à Athènes en million</p>    
-            <p>Mois = Nombre d'habitant en million de Londres - Nombre d'habitant en million de Paris </p>
+                Maintenant que nous avons assez d'indice, décodont les pour la localisation de la planque.
             </div>
 
         {% elif joueur_id == 3 %}
-            <h2>Ta mission : trouve l’heure exacte de l’attaque</h2>
+            <h2>Pour rappel, les indices sont...</h2>
             <div class="calcul">
-            ( Poids de la Tour Eiffel − Altitude du pont Cau Vang ) - 
-                <div class="fraction">
-                    <span class="num">Habitants de Chiang Rai</span>
-                    <span class="den">10</span>
-                </div>
-            - 100
+                Maintenant que nous avons assez d'indice, décodont les pour la localisation de la planque.
             </div>
         {% endif %}
 
@@ -43,28 +37,9 @@
         </div>
         <p>(Format réponse attendu : Nom monument JJ/MM 00:00)</p>
 
-                <div class="resultat" style="display:none">
-                    <p>
-                        Bravo !</br>
-                        Tu as trouvé la bonne réponse. 🎉</br>
-                    </p>
-                </div>
-
-                <div id="popup-attaque" class="popup" style="display:none;">
-                    <div class="popup-content">
-                        <p>Oh non, une autre attaque arrive ! 😱</p>
-                        <button id="close-attaque">Fermer</button>
-                    </div>
-                </div>
-
-
-                <div class="erreur" style="display:none; color:red;">
-                    <p>Mauvaise réponse ❌ — essaye encore !</p>
-                </div>
-
-        <div class="resultat" style="display:none;">🎉 Bravo, tu as réussi !</div>
-        <div class="erreur" style="display:none;">❌ Mauvaise réponse, réessaie !</div>
-      </div>
+        <div class="erreur" style="display:none; color:red;">
+            <p>Mauvaise réponse ❌ — essaye encore !</p>
+        </div>
 
       <button class="bouton-aide">💡</button>
 
@@ -137,23 +112,11 @@ submitBtn.addEventListener('click', () => {
     const valeur = reponse.value.trim().toLowerCase();
 
     if (valeur === 'a') { //marina bay sands hotel 08/07 16:00
-        reponseBox.style.display = 'none';
-        erreur.style.display = 'none';
-        resultat.style.display = 'block';
-        questionActuelle = parseInt(questionActuelle) + 1;
-        localStorage.setItem('questionActuelle', questionActuelle);
-        setTimeout(() => {
-            popupAttaque.style.display = 'flex';
-        }, 4000);
+        window.location.href = `/victoire/${joueurId}/`;
 
     } else {
         erreur.style.display = 'block';
     }
-});
-// --- FERMETURE DU POPUP D’ATTAQUE ---
-closeAttaque.addEventListener('click', () => {
-    popupAttaque.style.display = 'none';
-    window.location.href = `/question${questionActuelle}/${joueurId}/`; // redirige vers la question suivante
 });
 </script>
 </body>
