@@ -1,18 +1,24 @@
 html, body {
   height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
-  background-image: url('../static/background_vic.jpg');
-  background-repeat: no-repeat;
+  background: url('../static/background_vic.jpg') no-repeat center center fixed;
   background-size: cover;
-  background-position: center;
   color: #fff;
 }
 
+/* Pour éviter que la navbar pousse le fond */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .container {
-  max-width: 1200px; /* plus large pour les grands écrans */
-  margin: 120px auto 40px auto;
+  max-width: 1200px;
+  margin: 100px auto 40px auto;
   background: rgba(30, 30, 47, 0.9);
   padding: 30px;
   border-radius: 20px;
