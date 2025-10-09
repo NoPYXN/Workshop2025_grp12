@@ -20,3 +20,6 @@ def question3(request, joueur_id):
 
 def epreuve(request, joueur_id):
     return render(request, 'pages/epreuve.html', {'joueur_id': joueur_id})
+
+def victoire(request, joueur_id):
+    return render(request, 'pages/victoire.html', {'joueur_id': joueur_id})
