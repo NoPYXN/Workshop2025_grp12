@@ -9,9 +9,24 @@
 
 <script>
     const linkQuestion = document.getElementById('link-question');
+
     linkQuestion.addEventListener('click', (e) => {
-        e.preventDefault(); // empêche le lien normal
+        e.preventDefault(); // empêche le comportement normal du lien
+
         const joueurId = localStorage.getItem('joueurId') || 1;
-        window.location.href = `/question1/${joueurId}/`;
+        let questionActuelle = parseInt(localStorage.getItem('questionActuelle'));
+
+        // si aucune question n'est encore enregistrée, on initialise à 1
+        if (!questionActuelle) {
+            questionActuelle = 1;
+            localStorage.setItem('questionActuelle', questionActuelle);
+        }
+
+        // redirection selon la progression
+        if (questionActuelle <= 3) {
+            window.location.href = `/question${questionActuelle}/${joueurId}/`;
+        } else {
+            window.location.href = `/epreuve/${joueurId}/`;
+        }
     });
 </script>
