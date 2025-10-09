@@ -1,0 +1,15 @@
+[
+  {
+    "id": "tour_eiffel",
+    "nom": "Tour Eiffel",
+    "pays": "France",
+    "ville": "Paris",
+    "continent": "Europe",
+    "latitude": 48.8584,
+    "longitude": 2.2945,
+    "faits": [
+      "Inaugurée pour l'Exposition universelle de 1889.",
+      "Hauteur ~330 m avec antennes."
+    ]
+  }
+]
