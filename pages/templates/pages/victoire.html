@@ -2,177 +2,19 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8">
-    <title>Question 1</title>
+    <title>Victoire</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'question.css' %}">
+    <link rel="stylesheet" href="{% static 'victoire.css' %}">
     <link rel="stylesheet" href="{% static 'navbar.css' %}">
   </head>
   <body>
     {% include 'partials/navbar.html' %}
     <div class="container">
       <div class="context-box">
-        <div id="enonce">
-        <h1 class="titre-principal">Nous avons reçu un message ce matin. Chacun de vous possède un fragment, mais les lettres ont été mélangées ! Remettez vos mots dans le bon ordre, puis assemblez vos trois fragments pour reformer la phrase complète</h1>
-            {% if joueur_id == 1 %}
-                <h2>Ta mission : </h2>
-                <div>
-                    ste panoJ ua pêtre L'lalationtins
-                </div>
-            {% elif joueur_id == 2 %}
-                <h2>Ta mission :</h2>
-                <div>
-                    ne Gerèc ste Tuos rêpt assui
-                </div>
-            {% elif joueur_id == 3 %}
-                <h2>Votre mission est de retrouver la</h2>
-                <div>
-                    venis eJ sRisue ifnir ne ed
-                </div>
-            {% endif %}
-
-        <div class="reponse-box">
-            <input type="text" id="reponse" name="reponse" placeholder="Ta réponse ici...">
-            <button id="submit-reponse" class="btn-valider">Valider</button>
+        <div>
+            <h1 class="titre-principal">Vous avez protégé tout les monuments !</h1>
+            <h2>Bravo 🥳</h2>
         </div>
-        <p>(Format réponse attendu : le noms des trois monuments visés)</p>
     </div>
-    </div>
-        
-    <!-- Message de félicitations -->
-    <div id="felicitation" style="display:none; text-align:center; margin-top:30px;">
-        <h2 style="color:#00ff99; text-shadow:0 0 10px #00ff99;">🎉 Bravo, mission accomplie !</h2>
-    </div>
-
-    <!-- Message d'indice -->
-    <div id="indice-suivant" style="display:none; text-align:center; margin-top:20px;">
-        <p style="color:#ff4081; font-size:1.2em;">
-            Indice supplémentaire : Le monument est visible depuis une grande baie...
-        </p>
-    </div>
-
-                <div id="popup-attaque" class="popup" style="display:none;">
-                    <div class="popup-content">
-                        <p>Nous avons enfin assez d'indices pour localiser la planque des malfrats</p>
-                        <button id="close-attaque">Fermer</button>
-                    </div>
-                </div>
-
-
-                <div class="erreur" style="display:none; color:red;">
-                    <p>Mauvaise réponse ❌ — essaye encore !</p>
-                </div>
-
-        <div class="resultat" style="display:none;">🎉 Bravo, tu as réussi !</div>
-        <div class="erreur" style="display:none;">❌ Mauvaise réponse, réessaie !</div>
-      </div>
-
-      <button class="bouton-aide">💡</button>
-
-      <div id="popup-indice" class="popup" style="display:none;">
-        <div class="popup-content">
-          <span id="close-popup">&times;</span>
-          <p>Vous possédez un seul indice pour toute la partie, voulez vous vraiment l'utiliser</p>
-          <button id="confirm-indice" class="btn-oui">Oui</button>
-          <button id="cancel-indice" class="btn-non">Non</button>
-        </div>
-      </div>
-      <div class="indice" style="display:none;">
-        {% if joueur_id == 1 %}
-            <p>L'installation est prête</p>
-        {% elif joueur_id == 2 %}
-            <p>Tous est prêt aussi</p>
-        {% elif joueur_id == 3 %}
-            <p>Je viens de finir</p>
-        {% endif %}
-      </div>
-    </div>
-
-<script>
-const helpBtn = document.querySelector('.bouton-aide');
-const popup = document.getElementById('popup-indice');
-const closePopup = document.getElementById('close-popup');
-const confirmBtn = document.getElementById('confirm-indice');
-const cancelBtn = document.getElementById('cancel-indice');
-const indice = document.querySelector('.indice');
-
-const submitBtn = document.getElementById('submit-reponse');
-const reponse = document.getElementById('reponse');
-const resultat = document.querySelector('.resultat');
-const erreur = document.querySelector('.erreur');
-const reponseBox = document.querySelector('.reponse-box');
-const popupAttaque = document.getElementById('popup-attaque');
-const closeAttaque = document.getElementById('close-attaque');
-
-let joueurId = localStorage.getItem('joueurId') || '{{ joueur_id }}';
-let questionActuelle = localStorage.getItem('questionActuelle') || 1;
-let indiceUtilise = localStorage.getItem('indiceUtilise') === 'true';
-
-// Verification de la question et de l'utilisation de l'indice
-const urlMatch = window.location.pathname.match(/question(\d+)\/\d+\//);
-if (urlMatch) {
-    const currentQuestion = parseInt(urlMatch[1]);
-    if (currentQuestion !== parseInt(questionActuelle)) {
-        window.location.href = `/question${questionActuelle}/${joueurId}/`;
-    }
-}
-
-// Empêche l’usage multiple de l’indice
-if (indiceUtilise) {
-    helpBtn.disabled = true;
-    helpBtn.style.opacity = 0.5;
-    indice.style.display = 'none';
-}
-
-helpBtn.addEventListener('click', () => {
-    popup.style.display = 'flex';
-});
-
-closePopup.addEventListener('click', () => popup.style.display = 'none');
-cancelBtn.addEventListener('click', () => popup.style.display = 'none');
-
-confirmBtn.addEventListener('click', () => {
-    indice.style.display = 'block';
-    helpBtn.disabled = true;
-    helpBtn.style.opacity = 0.5;
-    popup.style.display = 'none';
-    reponseBox.style.display = 'block';
-    localStorage.setItem('indiceUtilise', true);//Château d'Osaka Cathédrale L’Acropole d’Athènes Basile-le-Bienheureux
-});
-
-submitBtn.addEventListener('click', () => {
-    const valeur = reponse.value.trim().toLowerCase();
-
-    if (valeur === 'château d\'osaka cathédrale l\'acropole d\'athènes basile-le-bienheureux') {
-         // Cacher l'énoncé (titre, image, texte)
-        document.getElementById('enonce').style.display = 'none';
-
-        // Masquer la zone de réponse et les erreurs si visibles
-        reponseBox.style.display = 'none';
-        erreur.style.display = 'none';
-
-        // Afficher le message de félicitations
-        document.getElementById('felicitation').style.display = 'block';
-
-        // Afficher le message de félicitations
-        const felicitation = document.getElementById('felicitation');
-        const indiceSuivant = document.getElementById('indice-suivant');
-        felicitation.style.display = 'block';
-
-        questionActuelle = parseInt(questionActuelle) + 1;
-        localStorage.setItem('questionActuelle', questionActuelle);
-        setTimeout(() => {
-            popupAttaque.style.display = 'flex';
-        }, 4000);
-
-    } else {
-        erreur.style.display = 'block';
-    }
-});
-// --- FERMETURE DU POPUP D’ATTAQUE ---
-closeAttaque.addEventListener('click', () => {
-    popupAttaque.style.display = 'none';
-    window.location.href = `/epreuve/${joueurId}/`; // redirige vers la question suivante
-});
-</script>
 </body>
 </html>
