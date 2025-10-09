@@ -12,19 +12,17 @@
     <div class="container">
       <div class="context-box">
         <div id="enonce">
-        <h1 class="titre-principal">Nous avons reçu un message ce matin. Chacun de vous possède un fragment, mais les lettres ont été mélangées ! Remettez vos mots dans le bon ordre, puis assemblez vos trois fragments pour reformer la phrase complète</h1>
+        <h1 class="titre-principal">Nous avons réussi à intercepter trois messages entre les malfrats ! Chacun d’entre vous doit en décoder un pour découvrir les trois monuments en danger !</h1>
+        <h2>Vous devez remettre les lettres dans le bon ordre et reformer la phrase pour trouver l'indice qui vous mènera vers un monument</h2>
             {% if joueur_id == 1 %}
-                <h2>Ta mission : </h2>
                 <div>
                     ste panoJ ua pêtre L'lalationtins
                 </div>
             {% elif joueur_id == 2 %}
-                <h2>Ta mission :</h2>
                 <div>
                     ne Gerèc ste Tuos rêpt assui
                 </div>
             {% elif joueur_id == 3 %}
-                <h2>Votre mission est de retrouver la</h2>
                 <div>
                     venis eJ sRisue ifnir ne ed
                 </div>
@@ -140,30 +138,39 @@ confirmBtn.addEventListener('click', () => {
 });
 
 submitBtn.addEventListener('click', () => {
-    const valeur = reponse.value.trim().toLowerCase();
+    let valeur = reponse.value
+        .toLowerCase()
+        .normalize('NFD') // retire les accents
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/['’]/g, '') // retire les apostrophes
+        .trim();
 
-    if (valeur === 'château d\'osaka cathédrale l\'acropole d\'athènes basile-le-bienheureux') {
-         // Cacher l'énoncé (titre, image, texte)
+    const monumentsAttendus = [
+        "chateau dosaka",
+        "cathedrale lacropole dathenes",
+        "basile-le-bienheureux"
+    ];
+
+    // Vérifie si chaque monument est présent dans la réponse (peu importe l’ordre)
+    const tousTrouves = monumentsAttendus.every(m => valeur.includes(m));
+
+    if (tousTrouves) {
+        // Bonne réponse
         document.getElementById('enonce').style.display = 'none';
-
-        // Masquer la zone de réponse et les erreurs si visibles
         reponseBox.style.display = 'none';
         erreur.style.display = 'none';
-
-        // Afficher le message de félicitations
         document.getElementById('felicitation').style.display = 'block';
 
-        // Afficher le message de félicitations
         const felicitation = document.getElementById('felicitation');
         const indiceSuivant = document.getElementById('indice-suivant');
         felicitation.style.display = 'block';
 
         questionActuelle = parseInt(questionActuelle) + 1;
         localStorage.setItem('questionActuelle', questionActuelle);
+
         setTimeout(() => {
             popupAttaque.style.display = 'flex';
         }, 4000);
-
     } else {
         erreur.style.display = 'block';
     }

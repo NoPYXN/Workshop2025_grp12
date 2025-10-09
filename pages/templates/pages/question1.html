@@ -12,22 +12,22 @@
     <div class="container">
         <div class="context-box">
             <div class="context-box" id="enonce">
-                <h1 class="titre-principal">Mission : Trouve le monument visé, la date et l'heure de l'attaque dans le temps imparti !</h1>
+                <h1 class="titre-principal">Ensemble trouvez le monument visé, la date et l'heure de l'attaque dans le temps imparti !</h1>
                 {% if joueur_id == 1 %}
-                    <h2>Ta mission est de trouver le monument qui est visé par l'attaque</h2>
+                    <h2>Résous le calcul pour obtenir la date de construction du monument que l'on recherche!</h2>
                     <div class="calcul">
-                        Année de construction de la Cathédrale Saint-Paul + Taille de la tour Eiffel en mètres + Nombre d’habitants à Moscou en millions - 2
+                        Année de construction de la Cathédrale Saint-Paul + Taille de la tour Eiffel en mètres + Nombre d'habitants à Moscou en millions - 2
                     </div>
                 {% elif joueur_id == 2 %}
-                    <h2>Ta mission : trouve la date de l'attaque</h2>
+                    <h2>Résous le calcul pour obtenir la date prévue de l'attaque!</h2>
                     <div class="calcul">
                         <p>Jour = Nombre de pays différent dans la documentation - Nombre d'habitant à Athènes en million</p>    
                         <p>Mois = Nombre d'habitant en million de Londres - Nombre d'habitant en million de Paris </p>
                     </div>
                 {% elif joueur_id == 3 %}
-                    <h2>Ta mission : trouve l’heure exacte de l’attaque</h2>
+                    <h2>Résous le calcul pour obtenir l'heure prévue de l'attaque!</h2>
                     <div class="calcul">
-                        Poids de la Tour Eiffel − Altitude du pont Cau Vang -
+                        Poids de la Tour Eiffel - Altitude du pont Cau Vang -
                         <div class="fraction">
                             <span class="num">Habitants de Chiang Rai</span>
                             <span class="den">10</span>
@@ -44,9 +44,10 @@
 
             <!-- Message d'indice -->
             <div id="indice-suivant" style="display:none; text-align:center; margin-top:20px;">
-                <p style="color:#ff4081; font-size:1.2em;">
-                    Indice supplémentaire : Le monument est visible depuis une grande baie...
-                </p>
+                <h2>
+                    Nous avons reçu une information : 70 000.<br>
+                    Elle nous aidera sûrement à localiser la planque des malfrats plus tard !
+                </h2>
             </div>
 
             <div class="reponse-box">
@@ -92,7 +93,7 @@
             <p>Jour : 11 - Nombre d'habitant à Athènes en million</p>
             <p>Mois : 9 - Nombre d'habitant en million de Paris</p>
         {% elif joueur_id == 3 %}
-            <p>Poids de la Tour Eiffel − Altitude du pont Cau Vang - 6 900</p>
+            <p>Poids de la Tour Eiffel - Altitude du pont Cau Vang - 6 900</p>
         {% endif %}
       </div>
     </div>
@@ -148,33 +149,23 @@ confirmBtn.addEventListener('click', () => {
 });
 
 submitBtn.addEventListener('click', () => {
-
     document.getElementById('format-reponse').style.display = 'none';
-
     const valeur = reponse.value.trim().toLowerCase();
-
     if (valeur === 'marina bay sands hotel 08/07 18:00') {
-        // Masquer les anciens éléments
         document.getElementById('enonce').style.display = 'none';
         reponseBox.style.display = 'none';
         erreur.style.display = 'none';
         resultat.style.display = 'none';
 
-        // Afficher le message de félicitations
         const felicitation = document.getElementById('felicitation');
         const indiceSuivant = document.getElementById('indice-suivant');
         felicitation.style.display = 'block';
-
-        // Après 3 secondes, afficher le nouvel indice
         setTimeout(() => {
             felicitation.style.display = 'none';
             indiceSuivant.style.display = 'block';
         }, 3000);
-
-        // Puis après encore quelques secondes, lancer la suite
         questionActuelle = parseInt(questionActuelle) + 1;
         localStorage.setItem('questionActuelle', questionActuelle);
-
         setTimeout(() => {
             popupAttaque.style.display = 'flex';
         }, 10000);

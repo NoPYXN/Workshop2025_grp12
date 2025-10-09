@@ -16,19 +16,19 @@
             <img src="{% static 'ascii.png' %}" alt="Table ASCII" class="ascii-image">
         <div id="enonce">
         <div class="question-content">
-            <h1 class="titre-principal">Mission : Trouve le monument visé, la date et l'heure de l'attaque dans le temps imparti grâce au indice laissé en code ascii décimaux !</h1>
+            <h1 class="titre-principal">Trouvez le monument visé, la date et l'heure de l'attaque dans le temps imparti grâce au indice laissé en code ascii décimaux !</h1>
             {% if joueur_id == 1 %}
-                <h2>Ta mission : trouve l’heure exacte de l’attaque, en t'aidant du tableau à gauche déchiffre l'indice en code ascii !</h2>
+                <h2>Décode l'indice ci-dessous grâce au tableau de conversion pour trouver l'heure à laquelle l'attaque est prévue!</h2>
                 <div>
                     <p>104 97 98 105 116 97 110 116 115 32 224 32 83 101 111 117 108 32 101 110 32 109 105 108 108 105 111 110 32 61 32 104 101 117 114 101</p> <!--habitants à Seoul en million = heure-->   
                 </div>
             {% elif joueur_id == 2 %}
-                <h2>Ta mission est de trouver le monument qui est visé par l'attaque, en t'aidant du tableau à gauche déchiffre l'indice en code ascii !</h2>
+                <h2>Décode l'indice ci-dessous grâce au tableau de conversion pour trouver le monument visé par l'attaque!</h2>
                 <div>
                      <p>67 111 110  99 117 101  32 112  97 114  32  67 104 114 105 115 116 111 112 104 101 114  32  87 114 101 110</p>  <!--Concu par Christopher Wren-->
                 </div>
             {% elif joueur_id == 3 %}
-                <h2>Ta mission : Ta mission est de trouver la date de l'attaque, en t'aidant du tableau à gauche déchiffre l'indice en code ascii !</h2>
+                <h2>Ta mission est de trouver la date de l'attaque, en t'aidant du tableau à gauche déchiffre l'indice en code ascii !</h2>
                 <div>
                     <p>104 117 105 116 32 104 101 117 114 101 32 116 114 101 110 116 101 45 110 101 117 102</p> <!--vingt-sept juillet-->
                 </div>
