@@ -16,18 +16,18 @@
                 {% if joueur_id == 1 %}
                     <h2>Ta mission est de trouver le monument qui est visé par l'attaque</h2>
                     <div class="calcul">
-                        (Année de construction de la Cathédrale Saint-Paul) + Taille de la tour Eiffel en mètres + Nombre d’habitants à Moscou en millions - 2 = ?
+                        Année de construction de la Cathédrale Saint-Paul + Taille de la tour Eiffel en mètres + Nombre d’habitants à Moscou en millions - 2
                     </div>
                 {% elif joueur_id == 2 %}
                     <h2>Ta mission : trouve la date de l'attaque</h2>
                     <div class="calcul">
-                        <p>Jour = Nombre de pays différent - Nombre d'habitant à Athènes en million</p>    
+                        <p>Jour = Nombre de pays différent dans la documentation - Nombre d'habitant à Athènes en million</p>    
                         <p>Mois = Nombre d'habitant en million de Londres - Nombre d'habitant en million de Paris </p>
                     </div>
                 {% elif joueur_id == 3 %}
                     <h2>Ta mission : trouve l’heure exacte de l’attaque</h2>
                     <div class="calcul">
-                        ( Poids de la Tour Eiffel − Altitude du pont Cau Vang ) -
+                        Poids de la Tour Eiffel − Altitude du pont Cau Vang -
                         <div class="fraction">
                             <span class="num">Habitants de Chiang Rai</span>
                             <span class="den">10</span>
@@ -90,11 +90,12 @@
       </div>
       <div class="indice" style="display:none;">
         {% if joueur_id == 1 %}
-            <p>Indice 1</p>
+            <p>1686 + Taille de la tour Eiffel en mètres</p>
         {% elif joueur_id == 2 %}
-            <p>Indice 2</p>
+            <p>Jour : 11 - Nombre d'habitant à Athènes en million</p>
+            <p>Mois : 9 - Nombre d'habitant en million de Paris</p>
         {% elif joueur_id == 3 %}
-            <p>Indice 3</p>
+            <p>Poids de la Tour Eiffel − Altitude du pont Cau Vang - 6 900</p>
         {% endif %}
       </div>
     </div>
@@ -155,7 +156,7 @@ submitBtn.addEventListener('click', () => {
 
     const valeur = reponse.value.trim().toLowerCase();
 
-    if (valeur === 'a') {
+    if (valeur === 'marina bay sands hotel 08/07 18:00') {
         // Masquer les anciens éléments
         document.getElementById('enonce').style.display = 'none';
         reponseBox.style.display = 'none';

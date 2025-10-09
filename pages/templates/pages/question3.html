@@ -15,17 +15,17 @@
             {% if joueur_id == 1 %}
                 <h2>Ta mission : </h2>
                 <div>
-                    L'installation est prête au Japon
+                    ste panoJ ua pêtre L'lalationtins
                 </div>
             {% elif joueur_id == 2 %}
                 <h2>Ta mission :</h2>
                 <div>
-                    Tous est bon aussi en Grèce
+                    ne Gerèc ste Tuos rêpt assui
                 </div>
             {% elif joueur_id == 3 %}
                 <h2>Votre mission est de retrouver la</h2>
                 <div>
-                    Je viens de finir en Russie
+                    venis eJ sRisue ifnir ne ed
                 </div>
             {% endif %}
 
@@ -70,11 +70,11 @@
       </div>
       <div class="indice" style="display:none;">
         {% if joueur_id == 1 %}
-            <p>Indice 1</p>
+            <p>L'installation est prête</p>
         {% elif joueur_id == 2 %}
-            <p>Indice 2</p>
+            <p>Tous est prêt aussi</p>
         {% elif joueur_id == 3 %}
-            <p>Indice 3</p>
+            <p>Je viens de finir</p>
         {% endif %}
       </div>
     </div>
@@ -134,7 +134,7 @@ confirmBtn.addEventListener('click', () => {
 submitBtn.addEventListener('click', () => {
     const valeur = reponse.value.trim().toLowerCase();
 
-    if (valeur === 'a') { //Château d'Osaka Cathédrale L’Acropole d’Athènes Basile-le-Bienheureux
+    if (valeur === 'a') { //château d'osaka cathédrale l’acropole d’athènes basile-le-bienheureux
         reponseBox.style.display = 'none';
         erreur.style.display = 'none';
         resultat.style.display = 'block';
