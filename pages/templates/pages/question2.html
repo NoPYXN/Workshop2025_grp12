@@ -39,32 +39,38 @@
               <button id="submit-reponse" class="btn-valider">Valider</button>
             </div>
             <p>(Format réponse attendu : Nom monument JJ/MM 00:00)</p>
-        </div>
-        <!-- Message de félicitations -->
-        <div id="felicitation" style="display:none; text-align:center; margin-top:30px;">
-            <h2 style="color:#00ff99; text-shadow:0 0 10px #00ff99;">🎉 Bravo, mission accomplie !</h2>
-        </div>
-    
-        <!-- Message d'indice -->
-        <div id="indice-suivant" style="display:none; text-align:center; margin-top:20px;">
-            <p style="color:#ff4081; font-size:1.2em;">
-                Indice supplémentaire : Le monument est visible depuis une grande baie...
-            </p>
-        </div>
-    
-        <div id="popup-attaque" class="popup" style="display:none;">
-            <div class="popup-content">
-                <p>Oh non, une autre attaque arrive ! 😱</p>
-                <button id="close-attaque">Fermer</button>
+            <div class="erreur" style="display:none; color:red;">
+                <p>Mauvaise réponse ❌ — essaye encore !</p>
             </div>
         </div>
-    
-        <div class="erreur" style="display:none; color:red;">
-            <p>Mauvaise réponse ❌ — essaye encore !</p>
+    </div>
+    </div>
+    </div>
+
+    <!-- Message de félicitations -->
+    <div id="felicitation" style="display:none; text-align:center; margin-top:30px;">
+        <h2 style="color:#00ff99; text-shadow:0 0 10px #00ff99;">🎉 Bravo, mission accomplie !</h2>
+    </div>
+
+    <!-- Message d'indice -->
+    <div id="indice-suivant" style="display:none; text-align:center; margin-top:20px;">
+        <p style="color:#ff4081; font-size:1.2em;">
+            Indice supplémentaire : Le monument est visible depuis une grande baie...
+        </p>
+    </div>
+
+    <div id="popup-attaque" class="popup" style="display:none;">
+        <div class="popup-content">
+            <p>Oh non, une autre attaque arrive ! 😱</p>
+            <button id="close-attaque">Fermer</button>
         </div>
     </div>
 
-    <div>
+    <div class="erreur" style="display:none; color:red;">
+        <p>Mauvaise réponse ❌ — essaye encore !</p>
+    </div>
+</div>
+
       <button class="bouton-aide">💡</button>
 
       <div id="popup-indice" class="popup" style="display:none;">
@@ -83,6 +89,7 @@
         {% elif joueur_id == 3 %}
             <p>vingt-sept juillet</p>
         {% endif %}
+      </div>
       </div>
     </div>
 
