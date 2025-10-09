@@ -38,7 +38,7 @@
         
     <!-- Message de félicitations -->
     <div id="felicitation" style="display:none; text-align:center; margin-top:30px;">
-        <h2 style="color:#00ff99; text-shadow:0 0 10px #00ff99;">🎉 Bravo, mission accomplie !</h2>
+        <h2 style="color:#00ff99; text-shadow:0 0 10px #00ff99;">Vos informations étaient bonnes, nous avons pu déjouer les trois attaques !</h2>
     </div>
 
     <!-- Message d'indice -->
@@ -51,7 +51,7 @@
                 <div id="popup-attaque" class="popup" style="display:none;">
                     <div class="popup-content">
                         <p>Nous avons enfin tous les indices, allons localiser la planque des malfrats !</p>
-                        <button id="close-attaque">Fermer</button>
+                        <button id="close-attaque">C'est parti</button>
                     </div>
                 </div>
 
@@ -165,12 +165,17 @@ submitBtn.addEventListener('click', () => {
         const indiceSuivant = document.getElementById('indice-suivant');
         felicitation.style.display = 'block';
 
+        setTimeout(() => {
+            felicitation.style.display = 'none';
+            indiceSuivant.style.display = 'block';
+        }, 2000);
+
         questionActuelle = parseInt(questionActuelle) + 1;
         localStorage.setItem('questionActuelle', questionActuelle);
 
         setTimeout(() => {
             popupAttaque.style.display = 'flex';
-        }, 4000);
+        }, 5000);
     } else {
         erreur.style.display = 'block';
     }

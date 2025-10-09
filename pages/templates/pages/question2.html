@@ -2,7 +2,7 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8">
-    <title>Question 1</title>
+    <title>Enigme 2</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'question.css' %}">
     <link rel="stylesheet" href="{% static 'navbar.css' %}">
@@ -49,7 +49,7 @@
 
     <!-- Message de félicitations -->
     <div id="felicitation" style="display:none; text-align:center; margin-top:30px;">
-        <h2 style="color:#00ff99; text-shadow:0 0 10px #00ff99;">🎉 Bravo, mission accomplie !</h2>
+        <h2 style="color:#00ff99; text-shadow:0 0 10px #00ff99;">Vos informations étaient bonnes, nous avons pu déjouer l'attaque !</h2>
     </div>
 
     <!-- Message d'indice -->
@@ -62,8 +62,8 @@
 
     <div id="popup-attaque" class="popup" style="display:none;">
         <div class="popup-content">
-            <p>On a reçu d'autres informations sur une attaque potentielle !</p>
-            <button id="close-attaque">Fermer</button>
+            <p>Nous avons reçu des messages cryptés évoquant une potentielle attaque&nbsp;!</p>
+            <button id="close-attaque">Y allez</button>
         </div>
     </div>
 
@@ -174,12 +174,12 @@ submitBtn.addEventListener('click', () => {
         setTimeout(() => {
             felicitation.style.display = 'none';
             indiceSuivant.style.display = 'block';
-        }, 3000);
+        }, 2000);
 
         // Après quelques secondes, afficher le popup attaque
         setTimeout(() => {
             popupAttaque.style.display = 'flex';
-        }, 4000);
+        }, 5000);
 
     } else {
         erreur.style.display = 'block';

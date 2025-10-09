@@ -2,7 +2,7 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8">
-    <title>Question 1</title>
+    <title>Epreuve final</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'question.css' %}">
     <link rel="stylesheet" href="{% static 'navbar.css' %}">
@@ -10,108 +10,38 @@
   <body>
     {% include 'partials/navbar.html' %}
     <div class="container">
-      <div class="context-box">
-        <h1 class="titre-principal">Mission : Trouve la planque du poseur de bombe !</h1>
-        {% if joueur_id == 1 %}
-            <h2>Pour rappel, les indices sont...</h2>
-            <div class="calcul">
-                Maintenant que nous avons assez d'indice, décodont les pour la localisation de la planque.
+        <div class="context-box">
+            <h1 class="titre-principal">Il est maintenant temps de trouver leur planque !</h1>
+            <h2>On a compris à quoi correspondent les indices que nous avons reçus jusque-là : 70 000 correspond au nombre d'habitants de la ville, la taille des arbres de Supertree Grove correspond au numéro de rue de la planque, et pour finir Ratyotha Rd est tout simplement le nom de la rue<br><br>
+            Maintenant que nous avons tous les indices, décodons-les pour trouver leur planque et les arrêter</h2>
+
+
+            <div class="reponse-box">
+                <input type="text" id="reponse" name="reponse" placeholder="Ta réponse ici...">
+                <button id="submit-reponse" class="btn-valider">Valider</button>
             </div>
+            <p>(Format réponse attendu : N° nomRue ville)</p>
 
-        {% elif joueur_id == 2 %}
-            <h2>Pour rappel, les indices sont...</h2>
-            <div class="calcul">
-                Maintenant que nous avons assez d'indice, décodont les pour la localisation de la planque.
+            <div class="erreur" style="display:none; color:red;">
+                <p>Mauvaise réponse ❌ — essaye encore !</p>
             </div>
-
-        {% elif joueur_id == 3 %}
-            <h2>Pour rappel, les indices sont...</h2>
-            <div class="calcul">
-                Maintenant que nous avons assez d'indice, décodont les pour la localisation de la planque.
-            </div>
-        {% endif %}
-
-        <div class="reponse-box">
-            <input type="text" id="reponse" name="reponse" placeholder="Ta réponse ici...">
-            <button id="submit-reponse" class="btn-valider">Valider</button>
         </div>
-        <p>(Format réponse attendu : Nom monument JJ/MM 00:00)</p>
-
-        <div class="erreur" style="display:none; color:red;">
-            <p>Mauvaise réponse ❌ — essaye encore !</p>
-        </div>
-
-      <button class="bouton-aide">💡</button>
-
-      <div id="popup-indice" class="popup" style="display:none;">
-        <div class="popup-content">
-          <span id="close-popup">&times;</span>
-          <p>Utiliser ton indice ? (Tu n’en as qu’un seul !)</p>
-          <button id="confirm-indice" class="btn-oui">Oui</button>
-          <button id="cancel-indice" class="btn-non">Non</button>
-        </div>
-      </div>
-      <div class="indice" style="display:none;">
-        <p>Indice : </p>
-      </div>
     </div>
 
 <script>
-const helpBtn = document.querySelector('.bouton-aide');
-const popup = document.getElementById('popup-indice');
-const closePopup = document.getElementById('close-popup');
-const confirmBtn = document.getElementById('confirm-indice');
-const cancelBtn = document.getElementById('cancel-indice');
-const indice = document.querySelector('.indice');
 
 const submitBtn = document.getElementById('submit-reponse');
 const reponse = document.getElementById('reponse');
 const resultat = document.querySelector('.resultat');
 const erreur = document.querySelector('.erreur');
 const reponseBox = document.querySelector('.reponse-box');
-const popupAttaque = document.getElementById('popup-attaque');
-const closeAttaque = document.getElementById('close-attaque');
 
 let joueurId = localStorage.getItem('joueurId') || '{{ joueur_id }}';
-let questionActuelle = localStorage.getItem('questionActuelle') || 1;
-let indiceUtilise = localStorage.getItem('indiceUtilise') === 'true';
-
-const urlMatch = window.location.pathname.match(/question(\d+)\/\d+\//);
-if (urlMatch) {
-    const currentQuestion = parseInt(urlMatch[1]);
-    if (currentQuestion !== parseInt(questionActuelle)) {
-        window.location.href = `/question${questionActuelle}/${joueurId}/`;
-    }
-}
-
-// Empêche l’usage multiple de l’indice
-if (indiceUtilise) {
-    helpBtn.disabled = true;
-    helpBtn.style.opacity = 0.5;
-    indice.style.display = 'none';
-}
-
-// --- POPUP AIDE ---
-helpBtn.addEventListener('click', () => {
-    popup.style.display = 'flex';
-});
-
-closePopup.addEventListener('click', () => popup.style.display = 'none');
-cancelBtn.addEventListener('click', () => popup.style.display = 'none');
-
-confirmBtn.addEventListener('click', () => {
-    indice.style.display = 'block';
-    helpBtn.disabled = true;
-    helpBtn.style.opacity = 0.5;
-    popup.style.display = 'none';
-    reponseBox.style.display = 'block';
-    localStorage.setItem('indiceUtilise', true);
-});
 
 submitBtn.addEventListener('click', () => {
     const valeur = reponse.value.trim().toLowerCase();
 
-    if (valeur === 'a') { //marina bay sands hotel 08/07 16:00
+    if (valeur === '50 ratyotha rd chiang rai') {
         window.location.href = `/victoire/${joueurId}/`;
 
     } else {
