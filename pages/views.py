@@ -17,3 +17,6 @@ def question2(request, joueur_id):
 
 def question3(request, joueur_id):
     return render(request, 'pages/question3.html', {'joueur_id': joueur_id})
+
+def epreuve(request, joueur_id):
+    return render(request, 'pages/epreuve.html', {'joueur_id': joueur_id})

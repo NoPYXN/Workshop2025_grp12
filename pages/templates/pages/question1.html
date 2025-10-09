@@ -10,75 +10,89 @@
   <body>
     {% include 'partials/navbar.html' %}
     <div class="container">
-      <div class="context-box">
-        <h1 class="titre-principal">Mission : Trouve le monument visé, la date et l'heure de l'attaque dans le temps imparti !</h1>
-        {% if joueur_id == 1 %}
-            <h2>Ta mission est de trouver le monument qui est visé par l'attaque</h2>
-            <div class="calcul">
-                (Année de construction de la Cathédrale Saint-Paul) + Taille de la tour Eiffel en mètres + Nombre d’habitants à Moscou en millions - 2 = ?</span>
-            </div>
-
-        {% elif joueur_id == 2 %}
-            <h2>Ta mission : Ta mission est de trouver la date de l'attaque</h2>
-            <div class="calcul">
-            <p>Jour = Nombre de pays différent - Nombre d'habitant à Athènes en million</p>    
-            <p>Mois = Nombre d'habitant en million de Londres - Nombre d'habitant en million de Paris </p>
-            </div>
-
-        {% elif joueur_id == 3 %}
-            <h2>Ta mission : trouve l’heure exacte de l’attaque</h2>
-            <div class="calcul">
-            ( Poids de la Tour Eiffel − Altitude du pont Cau Vang ) - 
-                <div class="fraction">
-                    <span class="num">Habitants de Chiang Rai</span>
-                    <span class="den">10</span>
-                </div>
-            - 100
-            </div>
-        {% endif %}
-
-        <div class="reponse-box">
-            <input type="text" id="reponse" name="reponse" placeholder="Ta réponse ici...">
-            <button id="submit-reponse" class="btn-valider">Valider</button>
-        </div>
-        <p>(Format réponse attendu : Nom monument JJ/MM 00:00)</p>
-
-                <div class="resultat" style="display:none">
-                    <p>
-                        Bravo !</br>
-                        Tu as trouvé la bonne réponse. 🎉</br>
-                    </p>
-                </div>
-
-                <div id="popup-attaque" class="popup" style="display:none;">
-                    <div class="popup-content">
-                        <p>Oh non, une autre attaque arrive ! 😱</p>
-                        <button id="close-attaque">Fermer</button>
+        <div class="context-box">
+            <div class="context-box" id="enonce">
+                <h1 class="titre-principal">Mission : Trouve le monument visé, la date et l'heure de l'attaque dans le temps imparti !</h1>
+                {% if joueur_id == 1 %}
+                    <h2>Ta mission est de trouver le monument qui est visé par l'attaque</h2>
+                    <div class="calcul">
+                        (Année de construction de la Cathédrale Saint-Paul) + Taille de la tour Eiffel en mètres + Nombre d’habitants à Moscou en millions - 2 = ?
                     </div>
-                </div>
+                {% elif joueur_id == 2 %}
+                    <h2>Ta mission : trouve la date de l'attaque</h2>
+                    <div class="calcul">
+                        <p>Jour = Nombre de pays différent - Nombre d'habitant à Athènes en million</p>    
+                        <p>Mois = Nombre d'habitant en million de Londres - Nombre d'habitant en million de Paris </p>
+                    </div>
+                {% elif joueur_id == 3 %}
+                    <h2>Ta mission : trouve l’heure exacte de l’attaque</h2>
+                    <div class="calcul">
+                        ( Poids de la Tour Eiffel − Altitude du pont Cau Vang ) -
+                        <div class="fraction">
+                            <span class="num">Habitants de Chiang Rai</span>
+                            <span class="den">10</span>
+                        </div>
+                        - 100
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Message de félicitations -->
+            <div id="felicitation" style="display:none; text-align:center; margin-top:30px;">
+                <h2 style="color:#00ff99; text-shadow:0 0 10px #00ff99;">🎉 Bravo, mission accomplie !</h2>
+            </div>
+
+            <!-- Message d'indice -->
+            <div id="indice-suivant" style="display:none; text-align:center; margin-top:20px;">
+                <p style="color:#ff4081; font-size:1.2em;">
+                    Indice supplémentaire : Le monument est visible depuis une grande baie...
+                </p>
+            </div>
+
+            <div class="reponse-box">
+                <input type="text" id="reponse" name="reponse" placeholder="Ta réponse ici...">
+                <button id="submit-reponse" class="btn-valider">Valider</button>
+            </div>
+            <p id="format-reponse">(Format réponse attendu : Nom monument JJ/MM 00:00)</p>
+
+                    <div class="resultat" style="display:none">
+                        <p>
+                            Bravo !</br>
+                            Tu as trouvé la bonne réponse. 🎉</br>
+                        </p>
+                    </div>
+
+                    <div id="popup-attaque" class="popup" style="display:none;">
+                        <div class="popup-content">
+                            <p>Oh non, une autre attaque arrive ! 😱</p>
+                            <button id="close-attaque">Fermer</button>
+                        </div>
+                    </div>
 
 
-                <div class="erreur" style="display:none; color:red;">
-                    <p>Mauvaise réponse ❌ — essaye encore !</p>
-                </div>
+                    <div class="erreur" style="display:none; color:red;">
+                        <p>Mauvaise réponse ❌ — essaye encore !</p>
+                    </div>
 
-        <div class="resultat" style="display:none;">🎉 Bravo, tu as réussi !</div>
-        <div class="erreur" style="display:none;">❌ Mauvaise réponse, réessaie !</div>
-      </div>
-
-      <button class="bouton-aide">💡</button>
-
-      <div id="popup-indice" class="popup" style="display:none;">
-        <div class="popup-content">
-          <span id="close-popup">&times;</span>
-          <p>Utiliser ton indice ? (Tu n’en as qu’un seul !)</p>
-          <button id="confirm-indice" class="btn-oui">Oui</button>
-          <button id="cancel-indice" class="btn-non">Non</button>
+            <div class="resultat" style="display:none;">🎉 Bravo, tu as réussi !</div>
+            <div class="erreur" style="display:none;">❌ Mauvaise réponse, réessaie !</div>
         </div>
-      </div>
-      <div class="indice" style="display:none;">
-        <p>Indice : </p>
-      </div>
+
+        <button class="bouton-aide">💡</button>
+
+        <div id="popup-indice" class="popup" style="display:none;">
+            <div class="popup-content">
+            <span id="close-popup">&times;</span>
+            <p>Utiliser ton indice ? (Tu n’en as qu’un seul !)</p>
+            <button id="confirm-indice" class="btn-oui">Oui</button>
+            <button id="cancel-indice" class="btn-non">Non</button>
+            </div>
+        </div>
+            <div class="indice" style="display:none;">
+                <p>Indice : </p>
+            </div>
+        </div>
+        </div>
     </div>
 
 <script>
@@ -134,18 +148,36 @@ confirmBtn.addEventListener('click', () => {
 });
 
 submitBtn.addEventListener('click', () => {
+
+    document.getElementById('format-reponse').style.display = 'none';
+
     const valeur = reponse.value.trim().toLowerCase();
 
-    if (valeur === 'a') { //marina bay sands hotel 08/07 16:00
+    if (valeur === 'a') {
+        // Masquer les anciens éléments
+        document.getElementById('enonce').style.display = 'none';
         reponseBox.style.display = 'none';
         erreur.style.display = 'none';
-        resultat.style.display = 'block';
+        resultat.style.display = 'none';
+
+        // Afficher le message de félicitations
+        const felicitation = document.getElementById('felicitation');
+        const indiceSuivant = document.getElementById('indice-suivant');
+        felicitation.style.display = 'block';
+
+        // Après 3 secondes, afficher le nouvel indice
+        setTimeout(() => {
+            felicitation.style.display = 'none';
+            indiceSuivant.style.display = 'block';
+        }, 3000);
+
+        // Puis après encore quelques secondes, lancer la suite
         questionActuelle = parseInt(questionActuelle) + 1;
         localStorage.setItem('questionActuelle', questionActuelle);
+
         setTimeout(() => {
             popupAttaque.style.display = 'flex';
-        }, 4000);
-
+        }, 10000);
     } else {
         erreur.style.display = 'block';
     }
