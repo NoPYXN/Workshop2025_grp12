@@ -246,9 +246,9 @@ input {
 }
 
 #popup-attaque .popup-content {
-  background: #fff3cd;
-  color: #856404;
-  border: 2px solid #ffeeba;
+  background: #ff3a3a;
+  color: #8b0404;
+  border: 2px solid #ffa3a3;
   border-radius: 12px;
   padding: 25px;
   text-align: center;
@@ -266,7 +266,7 @@ input {
 
 #close-attaque {
   margin-top: 15px;
-  background: #856404;
+  background: #850404;
   color: white;
   border: none;
   padding: 8px 15px;
@@ -275,7 +275,7 @@ input {
 }
 
 #close-attaque:hover {
-  background: #5c4303;
+  background: #5c0303;
 }
 
 /* petite animation d’alerte */

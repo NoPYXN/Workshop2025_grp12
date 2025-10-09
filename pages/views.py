@@ -23,3 +23,12 @@ def epreuve(request, joueur_id):
 
 def victoire(request, joueur_id):
     return render(request, 'pages/victoire.html', {'joueur_id': joueur_id})
+
+def fail1(request, joueur_id):
+    return render(request, 'pages/fail1.html', {'joueur_id': joueur_id})
+
+def fail2(request, joueur_id):
+    return render(request, 'pages/fail2.html', {'joueur_id': joueur_id})
+
+def fail3(request, joueur_id):
+    return render(request, 'pages/fail3.html', {'joueur_id': joueur_id})

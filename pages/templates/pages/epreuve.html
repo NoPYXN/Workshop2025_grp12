@@ -6,48 +6,82 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'question.css' %}">
     <link rel="stylesheet" href="{% static 'navbar.css' %}">
+    <style>
+      .timer {
+        position: absolute; /* sous la navbar */
+        top: 70px; /* ajuster selon la hauteur de la navbar */
+        right: 30px;
+        font-size: 36px;
+        font-weight: 900;
+        color: #ff0000;
+        z-index: 9999;
+        font-family: "Poppins", sans-serif;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+      }
+    </style>
   </head>
   <body>
     {% include 'partials/navbar.html' %}
+
+    <div class="timer" id="timer">05:00</div>
+
     <div class="container">
-        <div class="context-box">
-            <h1 class="titre-principal">Il est maintenant temps de trouver leur planque !</h1>
-            <h2>On a compris à quoi correspondent les indices que nous avons reçus jusque-là : 70 000 correspond au nombre d'habitants de la ville, la taille des arbres de Supertree Grove correspond au numéro de rue de la planque, et pour finir Ratyotha Rd est tout simplement le nom de la rue<br><br>
-            Maintenant que nous avons tous les indices, décodons-les pour trouver leur planque et les arrêter</h2>
+      <div class="context-box">
+        <h1 class="titre-principal">Il est maintenant temps de trouver leur planque !</h1>
+        <h2>
+          On a compris à quoi correspondent les indices que nous avons reçus jusque-là : 70 000 correspond au nombre d'habitants de la ville, la taille des arbres de Supertree Grove correspond au numéro de rue de la planque, et pour finir Ratyotha Rd est tout simplement le nom de la rue
+          <br><br>
+          Maintenant que nous avons tous les indices, décodons-les pour trouver leur planque et les arrêter
+        </h2>
 
-
-            <div class="reponse-box">
-                <input type="text" id="reponse" name="reponse" placeholder="Ta réponse ici...">
-                <button id="submit-reponse" class="btn-valider">Valider</button>
-            </div>
-            <p>(Format réponse attendu : N° nomRue ville)</p>
-
-            <div class="erreur" style="display:none; color:red;">
-                <p>Mauvaise réponse ❌ — essaye encore !</p>
-            </div>
+        <div class="reponse-box">
+          <input type="text" id="reponse" name="reponse" placeholder="Ta réponse ici...">
+          <button id="submit-reponse" class="btn-valider">Valider</button>
         </div>
+        <p>(Format réponse attendu : N° nomRue ville)</p>
+
+        <div class="erreur" style="display:none; color:red;">
+          <p>Mauvaise réponse ❌ — essaye encore !</p>
+        </div>
+      </div>
     </div>
 
-<script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const submitBtn = document.getElementById('submit-reponse');
+        const reponse = document.getElementById('reponse');
+        const erreur = document.querySelector('.erreur');
+        const timerEl = document.getElementById('timer');
+        let joueurId = localStorage.getItem('joueurId') || '{{ joueur_id }}';
 
-const submitBtn = document.getElementById('submit-reponse');
-const reponse = document.getElementById('reponse');
-const resultat = document.querySelector('.resultat');
-const erreur = document.querySelector('.erreur');
-const reponseBox = document.querySelector('.reponse-box');
+        // --- TIMER 5 MINUTES ---
+        let temps = 5 * 60;
 
-let joueurId = localStorage.getItem('joueurId') || '{{ joueur_id }}';
+        function updateTimer() {
+          const minutes = Math.floor(temps / 60);
+          const secondes = temps % 60;
+          timerEl.textContent = `${String(minutes).padStart(2,'0')}:${String(secondes).padStart(2,'0')}`;
 
-submitBtn.addEventListener('click', () => {
-    const valeur = reponse.value.trim().toLowerCase();
+          if (temps <= 0) {
+            window.location.href = '/index.html';
+          } else {
+            temps--;
+            setTimeout(updateTimer, 1000);
+          }
+        }
 
-    if (valeur === '50 ratyotha rd chiang rai') {
-        window.location.href = `/victoire/${joueurId}/`;
+        updateTimer();
 
-    } else {
-        erreur.style.display = 'block';
-    }
-});
-</script>
-</body>
+        // --- VALIDATION RÉPONSE ---
+        submitBtn.addEventListener('click', () => {
+          const valeur = reponse.value.trim().toLowerCase();
+          if (valeur === '50 ratyotha rd chiang rai') {
+            window.location.href = `/victoire/${joueurId}/`;
+          } else {
+            erreur.style.display = 'block';
+          }
+        });
+      });
+    </script>
+  </body>
 </html>

@@ -6,9 +6,25 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'question.css' %}">
     <link rel="stylesheet" href="{% static 'navbar.css' %}">
+    <style>
+      .timer {
+        position: absolute; /* sous la navbar */
+        top: 70px; /* ajuster selon la hauteur de la navbar */
+        right: 30px;
+        font-size: 36px;
+        font-weight: 900;
+        color: #ff0000;
+        z-index: 9999;
+        font-family: "Poppins", sans-serif;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+      }
+    </style>
   </head>
   <body>
     {% include 'partials/navbar.html' %}
+
+    <div class="timer" id="timer">05:00</div>
+
     <div class="container">
         <div class="context-box">
             <div class="context-box" id="enonce">
@@ -178,6 +194,41 @@ closeAttaque.addEventListener('click', () => {
     popupAttaque.style.display = 'none';
     window.location.href = `/question${questionActuelle}/${joueurId}/`;
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const timerEl = document.getElementById('timer');
+    const DUREE = 1 * 10 * 1000;
+
+    // Vérifie si une fin de timer est déjà stockée
+    let endTime = localStorage.getItem('timerEnd');
+    if (!endTime) {
+        endTime = Date.now() + DUREE;
+        localStorage.setItem('timerEnd', endTime);
+    } else {
+        endTime = parseInt(endTime);
+    }
+
+    function updateTimer() {
+        const now = Date.now();
+        let diff = Math.max(0, Math.floor((endTime - now) / 1000)); // en secondes
+
+        const minutes = Math.floor(diff / 60);
+        const secondes = diff % 60;
+        if (timerEl) {
+            timerEl.textContent = `${String(minutes).padStart(2,'0')}:${String(secondes).padStart(2,'0')}`;
+        }
+
+        if (diff <= 0) {
+            localStorage.removeItem('timerEnd');
+            window.location.href = `/fail1/${joueurId}`;
+        } else {
+            setTimeout(updateTimer, 1000);
+        }
+    }
+
+    updateTimer();
+});
+
 </script>
 </body>
 </html>
