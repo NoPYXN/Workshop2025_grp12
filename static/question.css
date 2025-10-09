@@ -109,14 +109,14 @@ input {
 
 /* Contenu du popup */
 .popup-content {
-  background: #121212; /* noir très foncé */
-  border: 2px solid #ff4d4d; /* bordure rouge */
+  background: #1c0f0f; /* rouge très sombre de fond */
+  border: 2px solid #8b0000; /* bordure rouge sombre */
   border-radius: 15px;
   padding: 30px;
   width: 350px;
   max-width: 90%;
   text-align: center;
-  box-shadow: 0 0 20px rgba(255, 77, 77, 0.7); /* ombre rouge */
+  box-shadow: 0 0 20px rgba(139, 0, 0, 0.7); /* ombre rouge sombre */
   color: #fff;
   font-size: 1.1em;
   position: relative;
@@ -136,13 +136,14 @@ input {
   right: 15px;
   font-size: 1.5em;
   cursor: pointer;
-  color: #ff4d4d;
+  color: #8b0000;
   transition: 0.2s;
 }
 #close-popup:hover {
-  color: #ff1a1a;
+  color: #ff3333;
   transform: scale(1.2);
 }
+
 
 /* Boutons Oui / Non */
 .btn-oui, .btn-non {
@@ -156,21 +157,21 @@ input {
 }
 
 .btn-oui {
-  background: #ff4d4d;
+  background: #8b0000; /* rouge sombre */
   color: #fff;
 }
 .btn-oui:hover {
-  background: #ff1a1a;
+  background: #a60000; /* un peu plus clair au hover */
   transform: scale(1.05);
 }
 
 .btn-non {
-  background: #333;
-  color: #ff4d4d;
-  border: 1px solid #ff4d4d;
+  background: #2b1a1a; /* gris foncé tirant sur rouge sombre */
+  color: #8b0000;
+  border: 1px solid #8b0000;
 }
 .btn-non:hover {
-  background: #1a1a1a;
+  background: #1a0d0d; /* plus sombre au hover */
   transform: scale(1.05);
 }
 
