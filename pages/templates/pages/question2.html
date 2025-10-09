@@ -11,8 +11,10 @@
     {% include 'partials/navbar.html' %}
     <div class="container">
       <div class="context-box">
+        <div id="enonce">
         <div class="page-layout">
-        <img src="{% static 'ascii.png' %}" alt="Table ASCII" class="ascii-image">
+            <img src="{% static 'ascii.png' %}" alt="Table ASCII" class="ascii-image">
+        <div id="enonce">
         <div class="question-content">
             <h1 class="titre-principal">Mission : Trouve le monument visé, la date et l'heure de l'attaque dans le temps imparti grâce au indice laissé en code ascii décimaux !</h1>
             {% if joueur_id == 1 %}
@@ -39,29 +41,32 @@
             <p>(Format réponse attendu : Nom monument JJ/MM 00:00)</p>
         </div>
     </div>
+    </div>
+    </div>
 
-                <div class="resultat" style="display:none">
-                    <p>
-                        Bravo !</br>
-                        Tu as trouvé la bonne réponse. 🎉</br>
-                    </p>
-                </div>
+    <!-- Message de félicitations -->
+    <div id="felicitation" style="display:none; text-align:center; margin-top:30px;">
+        <h2 style="color:#00ff99; text-shadow:0 0 10px #00ff99;">🎉 Bravo, mission accomplie !</h2>
+    </div>
 
-                <div id="popup-attaque" class="popup" style="display:none;">
-                    <div class="popup-content">
-                        <p>Oh non, une autre attaque arrive ! 😱</p>
-                        <button id="close-attaque">Fermer</button>
-                    </div>
-                </div>
+    <!-- Message d'indice -->
+    <div id="indice-suivant" style="display:none; text-align:center; margin-top:20px;">
+        <p style="color:#ff4081; font-size:1.2em;">
+            Indice supplémentaire : Le monument est visible depuis une grande baie...
+        </p>
+    </div>
 
+    <div id="popup-attaque" class="popup" style="display:none;">
+        <div class="popup-content">
+            <p>Oh non, une autre attaque arrive ! 😱</p>
+            <button id="close-attaque">Fermer</button>
+        </div>
+    </div>
 
-                <div class="erreur" style="display:none; color:red;">
-                    <p>Mauvaise réponse ❌ — essaye encore !</p>
-                </div>
-
-        <div class="resultat" style="display:none;">🎉 Bravo, tu as réussi !</div>
-        <div class="erreur" style="display:none;">❌ Mauvaise réponse, réessaie !</div>
-      </div>
+    <div class="erreur" style="display:none; color:red;">
+        <p>Mauvaise réponse ❌ — essaye encore !</p>
+    </div>
+</div>
 
       <button class="bouton-aide">💡</button>
 
@@ -136,14 +141,37 @@ confirmBtn.addEventListener('click', () => {
 });
 
 submitBtn.addEventListener('click', () => {
+
     const valeur = reponse.value.trim().toLowerCase();
 
-    if (valeur === 'a') { // Cathédrale Saint-Paul 27/07 09:00
+    if (valeur === 'a') {// Cathédrale Saint-Paul 27/07 09:00
+
+        // Cacher l'énoncé (titre, image, texte)
+        document.getElementById('enonce').style.display = 'none';
+
+        // Masquer la zone de réponse et les erreurs si visibles
         reponseBox.style.display = 'none';
         erreur.style.display = 'none';
-        resultat.style.display = 'block';
+
+        // Afficher le message de félicitations
+        document.getElementById('felicitation').style.display = 'block';
+
+        // Augmenter la question pour la suite
         questionActuelle = parseInt(questionActuelle) + 1;
         localStorage.setItem('questionActuelle', questionActuelle);
+
+        // Afficher le message de félicitations
+        const felicitation = document.getElementById('felicitation');
+        const indiceSuivant = document.getElementById('indice-suivant');
+        felicitation.style.display = 'block';
+
+        // Après 3 secondes, afficher le nouvel indice
+        setTimeout(() => {
+            felicitation.style.display = 'none';
+            indiceSuivant.style.display = 'block';
+        }, 3000);
+
+        // Après quelques secondes, afficher le popup attaque
         setTimeout(() => {
             popupAttaque.style.display = 'flex';
         }, 4000);
