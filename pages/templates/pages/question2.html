@@ -1,116 +1,157 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <title>Question 2</title>
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'styles.css' %}">
-    </head>
-    <body>
-        {% include 'partials/navbar.html' %}
-        <div class="container">
-            <div class="context-box">
-                <p>
-                    {% if joueur_id == 1 %}
-                        <h1>Bienvenue Joueur 1</h1>
-                        <p>Indice 1</p>
-                    {% elif joueur_id == 2 %}
-                        <h1>Bienvenue Joueur 2</h1>
-                        <p>Indice 2</p>
-                    {% elif joueur_id == 3 %}
-                        <h1>Bienvenue Joueur 3</h1>
-                        <p>Indice 3</p>
-                    {% endif %}
-                </p>
-                
-                <div class="reponse-box">
-                    <input type="text" id="reponse" name="reponse" placeholder="Écrivez votre réponse ici">
-                    <button id="submit-reponse">Valider</button>
+  <head>
+    <meta charset="UTF-8">
+    <title>Question 1</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'question.css' %}">
+    <link rel="stylesheet" href="{% static 'navbar.css' %}">
+  </head>
+  <body>
+    {% include 'partials/navbar.html' %}
+    <div class="container">
+      <div class="context-box">
+        <div class="page-layout">
+        <img src="{% static 'ascii.png' %}" alt="Table ASCII" class="ascii-image">
+        <div class="question-content">
+            <h1 class="titre-principal">Mission : Trouve le monument visé, la date et l'heure de l'attaque dans le temps imparti grâce au indice laissé en code ascii décimaux !</h1>
+            {% if joueur_id == 1 %}
+                <h2>Ta mission : trouve l’heure exacte de l’attaque, en t'aidant du tableau à gauche déchiffre l'indice en code ascii !</h2>
+                <div>
+                    <p>118 105 110 103 116 45 115 101 116 32 106 117 105 108 108 101 116</p>    
                 </div>
-
-                <div class="resultat" style="display:none">
-                    <p>
-                        Bravo !</br>
-                        Tu as trouvé la bonne réponse. 🎉
-                    </p>
+            {% elif joueur_id == 2 %}
+                <h2>Ta mission est de trouver le monument qui est visé par l'attaque, en t'aidant du tableau à gauche déchiffre l'indice en code ascii !</h2>
+                <div>
+                    67 111 110  99 117 101  32 112  97 114  32  67 104 114 105 115 116 111 112 104 101 114  32  87 114 101 110
                 </div>
-
-                <div class="erreur" style="display:none; color:red;">
-                    <p>Mauvaise réponse ❌ — essaye encore !</p>
+            {% elif joueur_id == 3 %}
+                <h2>Ta mission : Ta mission est de trouver la date de l'attaque, en t'aidant du tableau à gauche déchiffre l'indice en code ascii !</h2>
+                <div>
+                    <p>104 117 105 116 32 104 101 117 114 101 32 116 114 101 110 116 101 45 110 101 117 102</p>    
                 </div>
-
-                <div class="resultat" style="display:none">
-                    <p>
-                        Bravo !</br>
-                        Tu as trouvé la bonne réponse. 🎉
-                    </p>
-                </div>
-
-                <div class="erreur" style="display:none; color:red;">
-                    <p>Mauvaise réponse ❌ — essaye encore !</p>
-                </div>
-
-            </div>
+            {% endif %}
             
-            <button class="bouton-aide">?</button>
-            
-            <div id="popup-indice" class="popup">
-            <div class="popup-content">
-                <span id="close-popup">&times;</span>
-                <p>Voulez-vous vraiment utiliser votre indice ? Vous n'en avez droit qu'à un seul dans toute la partie !</p>
-                <button id="confirm-indice">Oui</button>
-                <button id="cancel-indice">Non</button>
+            <div class="reponse-box">
+              <input type="text" id="reponse" name="reponse" placeholder="Ta réponse ici...">
+              <button id="submit-reponse" class="btn-valider">Valider</button>
             </div>
-            </div>
-
-            <div class="indice" style="display:none;">
-                <p>Voici un indice pour t'aider !</p>
-            </div>
+            <p>(Format réponse attendu : Nom monument JJ/MM 00:00)</p>
         </div>
-    </body>
-</html>
+    </div>
+
+                <div class="resultat" style="display:none">
+                    <p>
+                        Bravo !</br>
+                        Tu as trouvé la bonne réponse. 🎉</br>
+                    </p>
+                </div>
+
+                <div id="popup-attaque" class="popup" style="display:none;">
+                    <div class="popup-content">
+                        <p>Oh non, une autre attaque arrive ! 😱</p>
+                        <button id="close-attaque">Fermer</button>
+                    </div>
+                </div>
+
+
+                <div class="erreur" style="display:none; color:red;">
+                    <p>Mauvaise réponse ❌ — essaye encore !</p>
+                </div>
+
+        <div class="resultat" style="display:none;">🎉 Bravo, tu as réussi !</div>
+        <div class="erreur" style="display:none;">❌ Mauvaise réponse, réessaie !</div>
+      </div>
+
+      <button class="bouton-aide">💡</button>
+
+      <div id="popup-indice" class="popup" style="display:none;">
+        <div class="popup-content">
+          <span id="close-popup">&times;</span>
+          <p>Utiliser ton indice ? (Tu n’en as qu’un seul !)</p>
+          <button id="confirm-indice" class="btn-oui">Oui</button>
+          <button id="cancel-indice" class="btn-non">Non</button>
+        </div>
+      </div>
+      <div class="indice" style="display:none;">
+        <p>Indice : </p>
+      </div>
+    </div>
 
 <script>
-    const helpBtn = document.querySelector('.bouton-aide');
-    const popup = document.getElementById('popup-indice');
-    const closeModal = document.getElementById('close-popup');
-    const confirmBtn = document.getElementById('confirm-indice');
-    const cancelBtn = document.getElementById('cancel-indice');
-    const indice = document.querySelector('.indice');
-    const submitBtn = document.getElementById('submit-reponse');
-    const reponseBox = document.querySelector('.reponse-box');
-    const reponse = document.querySelector('.reponse');
-    const resultat = document.querySelector('.resultat');
-    const erreur = document.querySelector('.erreur');
-    const inputReponse = document.getElementById('reponse');
+const helpBtn = document.querySelector('.bouton-aide');
+const popup = document.getElementById('popup-indice');
+const closePopup = document.getElementById('close-popup');
+const confirmBtn = document.getElementById('confirm-indice');
+const cancelBtn = document.getElementById('cancel-indice');
+const indice = document.querySelector('.indice');
 
-    helpBtn.addEventListener('click', () => {
-        popup.style.display = 'flex';
-    });
+const submitBtn = document.getElementById('submit-reponse');
+const reponse = document.getElementById('reponse');
+const resultat = document.querySelector('.resultat');
+const erreur = document.querySelector('.erreur');
+const reponseBox = document.querySelector('.reponse-box');
+const popupAttaque = document.getElementById('popup-attaque');
+const closeAttaque = document.getElementById('close-attaque');
 
-    closeModal.addEventListener('click', () => {
-        popup.style.display = 'none';
-    });
-    cancelBtn.addEventListener('click', () => {
-        popup.style.display = 'none';
-    });
+let joueurId = localStorage.getItem('joueurId') || '{{ joueur_id }}';
+let questionActuelle = localStorage.getItem('questionActuelle') || 1;
+let indiceUtilise = localStorage.getItem('indiceUtilise') === 'true';
 
-    confirmBtn.addEventListener('click', () => {
-        indice.style.display = 'block';
-        helpBtn.disabled = true;
-        helpBtn.style.opacity = 0.5;
-        popup.style.display = 'none';
-    });
+const urlMatch = window.location.pathname.match(/question(\d+)\/\d+\//);
+if (urlMatch) {
+    const currentQuestion = parseInt(urlMatch[1]);
+    if (currentQuestion !== parseInt(questionActuelle)) {
+        window.location.href = `/question${questionActuelle}/${joueurId}/`;
+    }
+}
 
-    submitBtn.addEventListener('click', () => {
-        const valeur = inputReponse.value.trim().toLowerCase(); // on ignore les espaces et majuscules
+// Empêche l’usage multiple de l’indice
+if (indiceUtilise) {
+    helpBtn.disabled = true;
+    helpBtn.style.opacity = 0.5;
+    indice.style.display = 'none';
+}
 
-            if (valeur === 'a') {
-                reponseBox.style.display = 'none';
-                erreur.style.display = 'none';
-                resultat.style.display = 'block';
-            } else {
-                erreur.style.display = 'block';
-            }
-        });
+// --- POPUP AIDE ---
+helpBtn.addEventListener('click', () => {
+    popup.style.display = 'flex';
+});
+
+closePopup.addEventListener('click', () => popup.style.display = 'none');
+cancelBtn.addEventListener('click', () => popup.style.display = 'none');
+
+confirmBtn.addEventListener('click', () => {
+    indice.style.display = 'block';
+    helpBtn.disabled = true;
+    helpBtn.style.opacity = 0.5;
+    popup.style.display = 'none';
+    reponseBox.style.display = 'block';
+    localStorage.setItem('indiceUtilise', true);
+});
+
+submitBtn.addEventListener('click', () => {
+    const valeur = reponse.value.trim().toLowerCase();
+
+    if (valeur === 'a') { 
+        reponseBox.style.display = 'none';
+        erreur.style.display = 'none';
+        resultat.style.display = 'block';
+        questionActuelle = parseInt(questionActuelle) + 1;
+        localStorage.setItem('questionActuelle', questionActuelle);
+        setTimeout(() => {
+            popupAttaque.style.display = 'flex';
+        }, 4000);
+
+    } else {
+        erreur.style.display = 'block';
+    }
+});
+// --- FERMETURE DU POPUP D’ATTAQUE ---
+closeAttaque.addEventListener('click', () => {
+    popupAttaque.style.display = 'none';
+    window.location.href = `/question${questionActuelle}/${joueurId}/`; // redirige vers la question suivante
+});
 </script>
+</body>
+</html>
