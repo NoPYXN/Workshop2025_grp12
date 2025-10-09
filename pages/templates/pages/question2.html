@@ -100,11 +100,11 @@
       </div>
       <div class="indice" style="display:none;">
         {% if joueur_id == 1 %}
-            <p>habitants à Seoul en million = heure</p>
+            <p>habitants à Seoul en million = -----</p>
         {% elif joueur_id == 2 %}
-            <p>Concu par Christopher Wren</p>
+            <p>Concu par Christopher ----</p>
         {% elif joueur_id == 3 %}
-            <p>vingt-sept juillet</p>
+            <p>vingt-sept -------</p>
         {% endif %}
       </div>
       </div>
@@ -209,7 +209,10 @@ closeAttaque.addEventListener('click', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     const timerEl = document.getElementById('timer');
-    const DUREE = 8 * 60 * 1000; // 5 minutes en millisecondes
+    const DUREE = 5 * 60 * 1000; // 5 minutes en millisecondes
+
+    // Réinitialiser le timer pour la nouvelle question
+    localStorage.removeItem('timerEnd');
 
     // Vérifie si une fin de timer est déjà stockée
     let endTime = localStorage.getItem('timerEnd');
@@ -231,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (diff <= 0) {
-            localStorage.removeItem('timerEnd'); // reset après expiration
+            localStorage.removeItem('timerEnd');
             window.location.href = `/fail2/${joueurId}`;
         } else {
             setTimeout(updateTimer, 1000);

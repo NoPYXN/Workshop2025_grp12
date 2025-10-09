@@ -23,7 +23,7 @@
   <body>
     {% include 'partials/navbar.html' %}
 
-    <div class="timer" id="timer">05:00</div>
+    <div class="timer" id="timer">10:00</div>
 
     <div class="container">
       <div class="context-box">
@@ -206,6 +206,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const timerEl = document.getElementById('timer');
     const DUREE = 10 * 60 * 1000; // 5 minutes en millisecondes
 
+    // Réinitialiser le timer pour la nouvelle question
+    localStorage.removeItem('timerEnd');
+
     // Vérifie si une fin de timer est déjà stockée
     let endTime = localStorage.getItem('timerEnd');
     if (!endTime) {
@@ -226,8 +229,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (diff <= 0) {
-            localStorage.removeItem('timerEnd'); // reset après expiration
-            window.location.href = `/fail3/${joueurId}`;
+            localStorage.removeItem('timerEnd');
+            window.location.href = `/fail2/${joueurId}`;
         } else {
             setTimeout(updateTimer, 1000);
         }
